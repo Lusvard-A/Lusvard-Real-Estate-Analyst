@@ -11,9 +11,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
-        /* ============================================
-           CSS VARIABLES & RESET
-           ============================================ */
         :root {
             --navy-900: #0a1929;
             --navy-800: #102540;
@@ -38,15 +35,8 @@
             --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Inter', sans-serif;
@@ -63,9 +53,7 @@
             letter-spacing: -0.5px;
         }
 
-        /* ============================================
-           NAVIGATION — Light Navy
-           ============================================ */
+        /* Navigation */
         nav {
             background: var(--navy-700);
             border-bottom: 1px solid rgba(201, 169, 97, 0.15);
@@ -93,9 +81,7 @@
             letter-spacing: -0.5px;
         }
 
-        nav .logo span {
-            color: var(--gold);
-        }
+        nav .logo span { color: var(--gold); }
 
         nav ul {
             list-style: none;
@@ -123,17 +109,10 @@
             transition: var(--transition);
         }
 
-        nav ul li a:hover {
-            color: var(--white);
-        }
+        nav ul li a:hover { color: var(--white); }
+        nav ul li a:hover::after { width: 100%; }
 
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
-        /* ============================================
-           HERO SECTION — Reduced top padding
-           ============================================ */
+        /* Hero */
         .hero {
             background: linear-gradient(135deg, var(--navy-900) 0%, var(--navy-700) 100%);
             color: var(--white);
@@ -245,7 +224,6 @@
             color: var(--gold);
         }
 
-        /* Upwork button style */
         .btn-upwork {
             background: var(--upwork-green);
             color: var(--white);
@@ -328,9 +306,7 @@
             margin-top: 0.25rem;
         }
 
-        /* ============================================
-           SECTION BASE
-           ============================================ */
+        /* Sections */
         section {
             padding: 7rem 2.5rem;
             width: 100%;
@@ -369,12 +345,8 @@
             font-weight: 300;
         }
 
-        /* ============================================
-           ABOUT SECTION
-           ============================================ */
-        .about {
-            background: var(--white);
-        }
+        /* About */
+        .about { background: var(--white); }
 
         .about-grid {
             display: grid;
@@ -383,9 +355,7 @@
             align-items: start;
         }
 
-        .about-visual {
-            position: relative;
-        }
+        .about-visual { position: relative; }
 
         .about-visual img {
             width: 100%;
@@ -453,12 +423,8 @@
             letter-spacing: 0.5px;
         }
 
-        /* ============================================
-           SERVICES SECTION
-           ============================================ */
-        .services {
-            background: var(--cream);
-        }
+        /* Services */
+        .services { background: var(--cream); }
 
         .services-grid {
             display: grid;
@@ -495,9 +461,7 @@
             border-color: transparent;
         }
 
-        .service-card:hover::before {
-            transform: scaleX(1);
-        }
+        .service-card:hover::before { transform: scaleX(1); }
 
         .service-icon {
             width: 56px;
@@ -517,10 +481,7 @@
             color: var(--navy-900);
         }
 
-        .service-icon svg {
-            width: 28px;
-            height: 28px;
-        }
+        .service-icon svg { width: 28px; height: 28px; }
 
         .service-card h3 {
             font-size: 1.35rem;
@@ -538,7 +499,7 @@
         }
 
         /* ============================================
-           SKILLS SECTION
+           SKILLS SECTION — Two columns: Real Estate | Financial Analysis
            ============================================ */
         .skills {
             background: var(--navy-900);
@@ -546,36 +507,88 @@
             position: relative;
         }
 
-        .skills .section-title {
-            color: var(--white);
-        }
-
-        .skills .section-subtitle {
-            color: rgba(255, 255, 255, 0.6);
-        }
+        .skills .section-title { color: var(--white); }
+        .skills .section-subtitle { color: rgba(255, 255, 255, 0.6); }
 
         .skills-grid {
             display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 4rem;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 3rem;
         }
 
-        .skills-list {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0.5rem 3rem;
+        .skills-column {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(201, 169, 97, 0.2);
+            border-radius: 4px;
+            padding: 2.25rem 2rem;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .skills-column:hover {
+            border-color: var(--gold);
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-4px);
+        }
+
+        .skills-column-header {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.25rem;
+            border-bottom: 1px solid rgba(201, 169, 97, 0.25);
+        }
+
+        .skills-column-icon {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gold);
+            color: var(--navy-900);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .skills-column-icon svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        .skills-column-header h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            color: var(--gold);
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            line-height: 1.2;
+        }
+
+        .skills-column-header .sub {
+            display: block;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-top: 0.25rem;
+            font-weight: 500;
         }
 
         .skill-item {
             display: flex;
             align-items: center;
             gap: 0.85rem;
-            padding: 0.85rem 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 0.7rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
             font-size: 0.95rem;
             color: rgba(255, 255, 255, 0.85);
             transition: var(--transition);
         }
+
+        .skill-item:last-child { border-bottom: none; }
 
         .skill-item:hover {
             color: var(--gold);
@@ -595,7 +608,7 @@
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(201, 169, 97, 0.2);
             border-radius: 4px;
-            padding: 2.5rem;
+            padding: 2rem;
         }
 
         .tools-box h3 {
@@ -631,20 +644,11 @@
             border-color: var(--gold);
         }
 
-        /* ============================================
-           PORTFOLIO SECTION
-           ============================================ */
-        .portfolio {
-            background: var(--white);
-        }
+        /* Portfolio */
+        .portfolio { background: var(--white); }
 
-        .portfolio-category {
-            margin-bottom: 4rem;
-        }
-
-        .portfolio-category:last-of-type {
-            margin-bottom: 0;
-        }
+        .portfolio-category { margin-bottom: 4rem; }
+        .portfolio-category:last-of-type { margin-bottom: 0; }
 
         .category-header {
             display: flex;
@@ -679,15 +683,8 @@
             transition: var(--transition);
         }
 
-        .featured-video:hover {
-            box-shadow: var(--shadow-md);
-        }
-
-        .featured-video video {
-            width: 100%;
-            display: block;
-            background: #000;
-        }
+        .featured-video:hover { box-shadow: var(--shadow-md); }
+        .featured-video video { width: 100%; display: block; background: #000; }
 
         .featured-video-caption {
             padding: 1.25rem 1.75rem;
@@ -763,9 +760,7 @@
             transition: var(--transition);
         }
 
-        .portfolio-item:hover img {
-            transform: scale(1.05);
-        }
+        .portfolio-item:hover img { transform: scale(1.05); }
 
         .portfolio-item .overlay {
             position: absolute;
@@ -778,9 +773,7 @@
             padding: 1.5rem;
         }
 
-        .portfolio-item:hover .overlay {
-            opacity: 1;
-        }
+        .portfolio-item:hover .overlay { opacity: 1; }
 
         .portfolio-item .overlay span {
             color: var(--white);
@@ -825,16 +818,10 @@
             transform: translateX(4px);
         }
 
-        .portfolio-link:hover svg {
-            color: var(--gold);
-        }
+        .portfolio-link:hover svg { color: var(--gold); }
 
-        /* ============================================
-           EXPERIENCE SECTION
-           ============================================ */
-        .experience {
-            background: var(--cream);
-        }
+        /* Experience */
+        .experience { background: var(--cream); }
 
         .timeline {
             max-width: 900px;
@@ -917,12 +904,8 @@
             font-size: 0.95rem;
         }
 
-        /* ============================================
-           EDUCATION & CERTIFICATIONS
-           ============================================ */
-        .education {
-            background: var(--white);
-        }
+        /* Education */
+        .education { background: var(--white); }
 
         .edu-grid {
             display: grid;
@@ -956,9 +939,7 @@
             text-transform: uppercase;
         }
 
-        .edu-card ul {
-            list-style: none;
-        }
+        .edu-card ul { list-style: none; }
 
         .edu-card ul li {
             padding: 0.85rem 0;
@@ -967,9 +948,7 @@
             font-size: 0.95rem;
         }
 
-        .edu-card ul li:last-child {
-            border-bottom: none;
-        }
+        .edu-card ul li:last-child { border-bottom: none; }
 
         .edu-card ul li strong {
             display: block;
@@ -983,9 +962,7 @@
             color: var(--gray-400);
         }
 
-        /* ============================================
-           CONTACT SECTION — Side-by-side layout
-           ============================================ */
+        /* Contact */
         .contact {
             background: var(--navy-900);
             color: var(--white);
@@ -1010,7 +987,6 @@
             z-index: 1;
         }
 
-        /* Side-by-side contact layout */
         .contact-layout {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -1018,7 +994,6 @@
             align-items: center;
         }
 
-        /* Left side — intro text */
         .contact-intro .section-eyebrow {
             display: inline-block;
             margin-bottom: 1rem;
@@ -1037,7 +1012,6 @@
             margin: 0;
         }
 
-        /* Right side — contact card + buttons */
         .contact-actions {
             display: flex;
             flex-direction: column;
@@ -1073,9 +1047,7 @@
             transition: var(--transition);
         }
 
-        .contact-card a:hover {
-            color: var(--gold);
-        }
+        .contact-card a:hover { color: var(--gold); }
 
         .contact-buttons {
             display: flex;
@@ -1098,9 +1070,7 @@
             height: 18px;
         }
 
-        /* ============================================
-           FOOTER — Smaller
-           ============================================ */
+        /* Footer */
         footer {
             background: #050f1c;
             color: rgba(255, 255, 255, 0.5);
@@ -1110,13 +1080,9 @@
             letter-spacing: 0.5px;
         }
 
-        footer span {
-            color: var(--gold);
-        }
+        footer span { color: var(--gold); }
 
-        /* ============================================
-           RESPONSIVE DESIGN
-           ============================================ */
+        /* Responsive */
         @media (max-width: 1024px) {
             .hero .container {
                 grid-template-columns: 1fr;
@@ -1124,13 +1090,8 @@
                 text-align: center;
             }
 
-            .hero-content h1 {
-                font-size: 3.5rem;
-            }
-
-            .hero-buttons {
-                justify-content: center;
-            }
+            .hero-content h1 { font-size: 3.5rem; }
+            .hero-buttons { justify-content: center; }
 
             .hero-content .tagline {
                 margin-left: auto;
@@ -1152,22 +1113,15 @@
                 margin: 0 auto;
             }
 
-            .services-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
 
             .skills-grid {
                 grid-template-columns: 1fr;
-                gap: 3rem;
+                gap: 2rem;
             }
 
-            .portfolio-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .edu-grid {
-                grid-template-columns: 1fr;
-            }
+            .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+            .edu-grid { grid-template-columns: 1fr; }
 
             .contact-layout {
                 grid-template-columns: 1fr;
@@ -1175,65 +1129,27 @@
                 text-align: center;
             }
 
-            .contact-buttons {
-                justify-content: center;
-            }
+            .contact-buttons { justify-content: center; }
         }
 
         @media (max-width: 640px) {
-            section {
-                padding: 5rem 1.5rem;
-            }
-
-            nav .container {
-                padding: 0 1.5rem;
-            }
-
-            nav ul {
-                gap: 1.25rem;
-                font-size: 0.85rem;
-            }
-
-            .hero .container {
-                padding: 1.5rem 1.5rem 2.5rem;
-            }
-
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero-content .role {
-                font-size: 1.1rem;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .skills-list {
-                grid-template-columns: 1fr;
-            }
-
-            .portfolio-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .credentials {
-                grid-template-columns: 1fr;
-            }
+            section { padding: 5rem 1.5rem; }
+            nav .container { padding: 0 1.5rem; }
+            nav ul { gap: 1.25rem; font-size: 0.85rem; }
+            .hero .container { padding: 1.5rem 1.5rem 2.5rem; }
+            .hero-content h1 { font-size: 2.5rem; }
+            .hero-content .role { font-size: 1.1rem; }
+            .section-title { font-size: 2rem; }
+            .services-grid { grid-template-columns: 1fr; }
+            .portfolio-grid { grid-template-columns: 1fr; }
+            .credentials { grid-template-columns: 1fr; }
 
             .timeline-item {
                 padding: 1.75rem;
                 margin-left: 2rem;
             }
 
-            .contact-card {
-                padding: 1.5rem;
-            }
+            .contact-card { padding: 1.5rem; }
 
             .hero-photo-badge {
                 bottom: -20px;
@@ -1241,34 +1157,22 @@
                 padding: 1rem 1.25rem;
             }
 
-            .hero-photo-badge .number {
-                font-size: 2rem;
-            }
+            .hero-photo-badge .number { font-size: 2rem; }
 
             .featured-video-caption {
                 flex-direction: column;
                 align-items: flex-start;
             }
 
-            .contact-buttons {
-                flex-direction: column;
-            }
-
-            .contact-buttons .btn {
-                min-width: 100%;
-            }
-
-            .contact-intro .section-title {
-                font-size: 2rem;
-            }
+            .contact-buttons { flex-direction: column; }
+            .contact-buttons .btn { min-width: 100%; }
+            .contact-intro .section-title { font-size: 2rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ============================================
-         NAVIGATION — Light Navy Background
-         ============================================ -->
+    <!-- Navigation -->
     <nav>
         <div class="container">
             <a href="#" class="logo">Lusvard<span>.</span></a>
@@ -1282,9 +1186,7 @@
         </div>
     </nav>
 
-    <!-- ============================================
-         HERO SECTION — Reduced top padding
-         ============================================ -->
+    <!-- Hero -->
     <section class="hero">
         <div class="container">
             <div class="hero-content">
@@ -1309,9 +1211,7 @@
         </div>
     </section>
 
-    <!-- ============================================
-         ABOUT SECTION
-         ============================================ -->
+    <!-- About -->
     <section class="about" id="about">
         <div class="section-container">
             <div class="section-header">
@@ -1386,9 +1286,7 @@
         </div>
     </section>
 
-    <!-- ============================================
-         SERVICES SECTION — Monotone SVG icons
-         ============================================ -->
+    <!-- Services -->
     <section class="services" id="services">
         <div class="section-container">
             <div class="section-header">
@@ -1472,56 +1370,108 @@
     </section>
 
     <!-- ============================================
-         SKILLS SECTION — Dark section
+         SKILLS SECTION — Two columns: Real Estate | Financial Analysis + Tools
          ============================================ -->
     <section class="skills">
         <div class="section-container">
             <div class="section-header">
                 <span class="section-eyebrow">Capabilities</span>
                 <h2 class="section-title">Skills & Tools</h2>
-                <p class="section-subtitle">A complete toolkit for financial analysis, underwriting, and data-driven decision making.</p>
+                <p class="section-subtitle">A complete toolkit for real estate underwriting, financial analysis, and data-driven decision making.</p>
             </div>
 
             <div class="skills-grid">
-                <div class="skills-list">
-                    <div class="skill-item">Financial Modeling</div>
-                    <div class="skill-item">Real Estate Underwriting</div>
+                <!-- Column 1: Real Estate -->
+                <div class="skills-column">
+                    <div class="skills-column-header">
+                        <div class="skills-column-icon">
+                            <!-- Building icon -->
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                                <path d="M3 21h18"/>
+                                <path d="M5 21V7l7-4 7 4v14"/>
+                                <path d="M9 21v-6h6v6"/>
+                                <path d="M9 10h.01M15 10h.01"/>
+                            </svg>
+                        </div>
+                        <h3>Real Estate<span class="sub">Underwriting & Analysis</span></h3>
+                    </div>
+                    <div class="skill-item">Loan Sizing</div>
+                    <div class="skill-item">Acquisition, Disposition & Refinancing Underwriting</div>
+                    <div class="skill-item">NOI Analysis</div>
+                    <div class="skill-item">Hold/Sell Analysis</div>
+                    <div class="skill-item">Value-Add Strategy</div>
+                    <div class="skill-item">Comparable Sales & Rent Analysis</div>
+                    <div class="skill-item">DSCR, Debt Yield, LTV/LTC</div>
+                    <div class="skill-item">IRR & NPV</div>
                     <div class="skill-item">Pro Forma Modeling</div>
-                    <div class="skill-item">Investment Analysis</div>
-                    <div class="skill-item">Financial Planning</div>
-                    <div class="skill-item">Forecasting & Scenario Analysis</div>
-                    <div class="skill-item">Ratio & Variance Analysis</div>
-                    <div class="skill-item">FP&A and Budgeting</div>
-                    <div class="skill-item">Pitch Decks, IMs, Teasers</div>
-                    <div class="skill-item">Data Cleaning & Visualization</div>
-                    <div class="skill-item">Business Valuation — DCF, LBO, Comps</div>
-                    <div class="skill-item">NOI, DSCR, LTV/LTC, IRR, NPV</div>
+                    <div class="skill-item">Offering Memoranda</div>
+                    <div class="skill-item">Investor & Lender Presentations</div>
                     <div class="skill-item">Market Research & CoStar</div>
-                    <div class="skill-item">Capital Budgeting</div>
-                    <div class="skill-item">Cash Flow Modeling</div>
-                    <div class="skill-item">WACC, CAPM, FCFF/FCFE</div>
+                    <div class="skill-item">Market Positioning</div>
                 </div>
 
-                <div class="tools-box">
-                    <h3>Software & Tools</h3>
+                <!-- Column 2: Financial Analysis -->
+                <div class="skills-column">
+                    <div class="skills-column-header">
+                        <div class="skills-column-icon">
+                            <!-- Chart icon -->
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                                <path d="M3 3v18h18"/>
+                                <path d="M7 14l4-4 4 4 5-5"/>
+                            </svg>
+                        </div>
+                        <h3>Financial Analysis<span class="sub">Modeling & Forecasting</span></h3>
+                    </div>
+                    <div class="skill-item">DCF, IRR, NPV, WACC</div>
+                    <div class="skill-item">FCFF / FCFE</div>
+                    <div class="skill-item">CAPM</div>
+                    <div class="skill-item">Cash Flow Modeling</div>
+                    <div class="skill-item">Sensitivity & Scenario Analysis</div>
+                    <div class="skill-item">Capital Budgeting</div>
+                    <div class="skill-item">Ratio & Variance Analysis</div>
+                    <div class="skill-item">Budgeting & Forecasting</div>
+                    <div class="skill-item">Pricing Trend Analysis</div>
+                    <div class="skill-item">Financial Reporting</div>
+                    <div class="skill-item">Data Cleaning & Visualization</div>
+                    <div class="skill-item">3-Statement Modeling</div>
+                    <div class="skill-item">Business Valuation — DCF, LBO, Comps</div>
+                </div>
+
+                <!-- Column 3: Tools -->
+                <div class="skills-column">
+                    <div class="skills-column-header">
+                        <div class="skills-column-icon">
+                            <!-- Tools icon -->
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+                            </svg>
+                        </div>
+                        <h3>Software & Tools<span class="sub">Platforms & Technologies</span></h3>
+                    </div>
                     <div class="tools-list">
                         <span class="tool-tag">Excel</span>
                         <span class="tool-tag">Google Sheets</span>
                         <span class="tool-tag">Power BI</span>
                         <span class="tool-tag">Python</span>
+                        <span class="tool-tag">R</span>
                         <span class="tool-tag">SQL</span>
                         <span class="tool-tag">CoStar</span>
                         <span class="tool-tag">Canva</span>
                         <span class="tool-tag">PowerPoint</span>
+                    </div>
+
+                    <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(201, 169, 97, 0.2);">
+                        <h3 style="font-size: 0.9rem; color: var(--gold); margin-bottom: 1rem; font-family: 'Inter', sans-serif; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;">Certifications</h3>
+                        <div class="skill-item">ACRE — REFM Accelerator</div>
+                        <div class="skill-item">CFI — Corporate Finance</div>
+                        <div class="skill-item">DataCamp — Python Analytics</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ============================================
-         PORTFOLIO SECTION — Using ALL provided images
-         ============================================ -->
+    <!-- Portfolio -->
     <section class="portfolio" id="portfolio">
         <div class="section-container">
             <div class="section-header">
@@ -1530,14 +1480,12 @@
                 <p class="section-subtitle">A selection of offering memoranda, pro formas, underwriting models, and investor materials.</p>
             </div>
 
-            <!-- Category 1: Offering Memoranda (with featured video) -->
             <div class="portfolio-category">
                 <div class="category-header">
                     <h3>Offering Memoranda</h3>
                     <span class="count">09 Samples + Video</span>
                 </div>
 
-                <!-- Featured Video: OM Walkthrough -->
                 <div class="featured-video">
                     <video controls preload="metadata" poster="">
                         <source src="Screen Recording - Oct 22, 2026, 84939 PM.mp4" type="video/mp4">
@@ -1585,7 +1533,6 @@
                 </div>
             </div>
 
-            <!-- Category 2: Additional OM / Investor Materials -->
             <div class="portfolio-category">
                 <div class="category-header">
                     <h3>Investor & Deal Materials</h3>
@@ -1607,7 +1554,6 @@
                 </div>
             </div>
 
-            <!-- Category 3: Financial Models & Pro Formas -->
             <div class="portfolio-category">
                 <div class="category-header">
                     <h3>Financial Models & Pro Formas</h3>
@@ -1637,7 +1583,6 @@
                 </div>
             </div>
 
-            <!-- Category 4: Development Loans -->
             <div class="portfolio-category">
                 <div class="category-header">
                     <h3>Development Loan Underwriting</h3>
@@ -1667,7 +1612,6 @@
                 </div>
             </div>
 
-            <!-- Links to full files -->
             <div class="portfolio-links">
                 <a href="https://drive.google.com/drive/folders/1gfrVLxrxD6atgexz8JkAarPtjZCfQg9W" target="_blank" class="portfolio-link">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
@@ -1694,7 +1638,7 @@
     </section>
 
     <!-- ============================================
-         EXPERIENCE SECTION
+         EXPERIENCE SECTION — UPDATED TEXT
          ============================================ -->
     <section class="experience" id="experience">
         <div class="section-container">
@@ -1705,30 +1649,38 @@
             </div>
 
             <div class="timeline">
+                <!-- Experience 1: Independent Financial Consultant -->
                 <div class="timeline-item">
                     <h3>Independent Financial Consultant</h3>
                     <div class="company">Self-Employed (Upwork)</div>
                     <div class="date">Nov 2025 — Present · Remote</div>
                     <ul>
-                        <li>Supported capital raises and lending processes for multiple real estate clients by structuring offering memoranda and investor/lender presentations.</li>
-                        <li>Enabled confident investment decisions on value-add multifamily acquisitions by underwriting purchase price feasibility, renovation budgets, and projected exit returns for the deals.</li>
-                        <li>Improved investment and lending readiness for clients across asset types, including a retail and office condo project, by developing detailed pro formas and cash flow models.</li>
-                        <li>Supported multifamily acquisition decisions by underwriting deals and preparing financial analysis.</li>
-                        <li>Strengthened valuation accuracy and market positioning for multifamily assets by conducting comparable sales and rent analysis alongside market research on local supply, demand, and pricing trends.</li>
+                        <li>Built financial models and forecasts for clients to support capital-raising, lending, and investment decisions.</li>
+                        <li>Prepared financing packages, investor materials, and presentations tailored to lender and investor requirements.</li>
+                        <li>Developed standardized financial modeling and reporting templates to improve deal-evaluation efficiency for clients.</li>
+                        <li>Conducted financial and market research to inform client business cases and investment decisions.</li>
+                        <li>Supported budgeting and financial forecasting for clients across multiple industries and deal types.</li>
+                        <li>Performed ratio, variance, and sensitivity analysis to assess financial performance and risk across client engagements.</li>
                     </ul>
                 </div>
 
+                <!-- Experience 2: Real Estate Commercial Analyst -->
                 <div class="timeline-item">
                     <h3>Real Estate Commercial Analyst</h3>
-                    <div class="company">Max Benjamin Partners</div>
-                    <div class="date">Oct 2024 — Mar 2025 · Remote</div>
+                    <div class="company">Self-Employed (Upwork)</div>
+                    <div class="date">Oct 2024 — Present · Remote</div>
                     <ul>
-                        <li>Accelerated investment decision-making on acquisitions, developments, and refinancing deals by building detailed underwriting and cash flow models in Excel.</li>
-                        <li>Reduced deal-evaluation turnaround firm-wide by developing standardized templates for financial models and offering memoranda that were adopted across the team.</li>
+                        <li>Underwrote value-add multifamily acquisitions, evaluating purchase price feasibility, renovation budgets, and projected exit returns.</li>
+                        <li>Built acquisition, development, and refinancing models to support real estate investment decisions.</li>
+                        <li>Conducted comparable sales and rent analysis to support valuation and market positioning of multifamily assets.</li>
                         <li>Supported capital-raising and lending conversations with current market data by conducting market research and preparing offering memoranda and presentations using CoStar and PowerPoint.</li>
+                        <li>Prepared offering memoranda and investor/lender presentations for real estate capital raises and financing.</li>
+                        <li>Conducted due diligence and NOI-based hold/sell analysis to assess asset performance and investment viability.</li>
+                        <li>Developed pro formas and cash flow models for retail, office, and multifamily assets to support investment and lending readiness.</li>
                     </ul>
                 </div>
 
+                <!-- Experience 3: Financial Analyst -->
                 <div class="timeline-item">
                     <h3>Financial Analyst</h3>
                     <div class="company">Cognaize Engineering LLC</div>
@@ -1739,6 +1691,7 @@
                     </ul>
                 </div>
 
+                <!-- Experience 4: Financial Markets Monitoring Specialist -->
                 <div class="timeline-item">
                     <h3>Financial Markets Monitoring Specialist</h3>
                     <div class="company">Exinity Group (FXTM)</div>
@@ -1753,9 +1706,7 @@
         </div>
     </section>
 
-    <!-- ============================================
-         EDUCATION & CERTIFICATIONS
-         ============================================ -->
+    <!-- Education -->
     <section class="education">
         <div class="section-container">
             <div class="section-header">
@@ -1819,20 +1770,16 @@
         </div>
     </section>
 
-    <!-- ============================================
-         CONTACT SECTION — Side-by-side layout
-         ============================================ -->
+    <!-- Contact -->
     <section class="contact" id="contact">
         <div class="section-container">
             <div class="contact-layout">
-                <!-- Left: Intro text -->
                 <div class="contact-intro">
                     <span class="section-eyebrow">Get In Touch</span>
                     <h2 class="section-title">Let's build something valuable.</h2>
                     <p class="section-subtitle">Available for freelance consulting, project-based engagements, and full-time opportunities.</p>
                 </div>
 
-                <!-- Right: Contact card + action buttons -->
                 <div class="contact-actions">
                     <div class="contact-card">
                         <div class="label">Email</div>
@@ -1848,7 +1795,6 @@
                             Schedule a Consultation
                         </a>
                         <a href="https://www.upwork.com/freelancers/~01661c751ca5ed8c4e" target="_blank" class="btn btn-upwork">
-                            <!-- Upwork-style icon -->
                             <svg viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px;">
                                 <path d="M18.561 14.711c.382-2.397 1.493-5.001 3.439-5.001 1.006 0 1.92.504 2.484 1.279.564.775.856 1.787.753 2.949-.206 2.32-2.115 4.349-4.844 4.349-3.172 0-5.18-2.301-5.661-5.497-1.294 2.109-3.583 5.497-7.289 5.497-3.705 0-6.05-3.172-6.05-7.161C1.393 7.13 4.077 3 8.028 3c3.95 0 5.789 3.325 6.444 5.069l-.003.003-2.343.002c-.504-1.3-1.62-3.073-4.098-3.073-2.784 0-4.227 2.898-4.227 6.126 0 2.851 1.47 5.167 4.047 5.167 3.06 0 4.756-3.948 5.652-5.652h.003l.003-.003.003-.003c.003 0 .003-.003.003-.003l2.052.003z"/>
                             </svg>
@@ -1860,9 +1806,7 @@
         </div>
     </section>
 
-    <!-- ============================================
-         FOOTER — Smaller
-         ============================================ -->
+    <!-- Footer -->
     <footer>
         <p>&copy; 2026 Lusvard Arakelyan · Crafted with precision <span>·</span> All rights reserved.</p>
     </footer>
