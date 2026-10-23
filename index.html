@@ -1,1770 +1,560 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lusvard Arakelyan — Real Estate Analyst</title>
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <style>
-        /* ============================================
-           CSS VARIABLES & RESET
-           ============================================ */
-        :root {
-            --navy-900: #0a1929;
-            --navy-800: #102540;
-            --navy-700: #1a2f4a;
-            --navy-600: #243b5c;
-            --navy-light: #2d4a6f;
-            --gold: #c9a961;
-            --gold-light: #e0c98a;
-            --cream: #faf8f5;
-            --gray-50: #f7f9fc;
-            --gray-100: #eef2f7;
-            --gray-200: #d8dee8;
-            --gray-400: #8a94a6;
-            --gray-600: #4a5568;
-            --gray-800: #1f2937;
-            --white: #ffffff;
-            --shadow-sm: 0 2px 8px rgba(10, 25, 41, 0.06);
-            --shadow-md: 0 8px 24px rgba(10, 25, 41, 0.08);
-            --shadow-lg: 0 20px 50px rgba(10, 25, 41, 0.12);
-            --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.7;
-            color: var(--gray-800);
-            background-color: var(--white);
-            -webkit-font-smoothing: antialiased;
-        }
-
-        h1, h2, h3, h4 {
-            font-family: 'Playfair Display', serif;
-            font-weight: 600;
-            line-height: 1.2;
-            letter-spacing: -0.5px;
-        }
-
-        /* ============================================
-           NAVIGATION — Light Navy
-           ============================================ */
-        nav {
-            background: var(--navy-700);
-            border-bottom: 1px solid rgba(201, 169, 97, 0.15);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            padding: 1rem 0;
-        }
-
-        nav .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 2.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        nav .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--white);
-            text-decoration: none;
-            letter-spacing: -0.5px;
-        }
-
-        nav .logo span {
-            color: var(--gold);
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 2.5rem;
-        }
-
-        nav ul li a {
-            text-decoration: none;
-            color: rgba(255, 255, 255, 0.75);
-            font-weight: 500;
-            font-size: 0.95rem;
-            position: relative;
-            transition: var(--transition);
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: -6px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--gold);
-            transition: var(--transition);
-        }
-
-        nav ul li a:hover {
-            color: var(--white);
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
-        /* ============================================
-           HERO SECTION — Split layout with large photo
-           ============================================ */
-        .hero {
-            background: linear-gradient(135deg, var(--navy-900) 0%, var(--navy-700) 100%);
-            color: var(--white);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, rgba(201, 169, 97, 0.15) 0%, transparent 70%);
-            border-radius: 50%;
-        }
-
-        .hero .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 3.5rem 2.5rem 4rem;
-            display: grid;
-            grid-template-columns: 1.1fr 1fr;
-            gap: 5rem;
-            align-items: center;
-            position: relative;
-            z-index: 1;
-            width: 100%;
-        }
-
-        .hero-content .eyebrow {
-            display: inline-block;
-            font-size: 0.85rem;
-            font-weight: 500;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--gold);
-            margin-bottom: 1.25rem;
-            padding-bottom: 0.75rem;
-            border-bottom: 1px solid rgba(201, 169, 97, 0.4);
-        }
-
-        .hero-content h1 {
-            font-size: 4.5rem;
-            font-weight: 700;
-            margin-bottom: 1.25rem;
-            letter-spacing: -2px;
-            line-height: 1.05;
-        }
-
-        .hero-content h1 .accent {
-            color: var(--gold);
-            font-style: italic;
-        }
-
-        .hero-content .role {
-            font-size: 1.35rem;
-            font-weight: 300;
-            color: rgba(255, 255, 255, 0.85);
-            margin-bottom: 0.85rem;
-        }
-
-        .hero-content .tagline {
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.6);
-            margin-bottom: 2rem;
-            max-width: 500px;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 1rem 2.25rem;
-            text-decoration: none;
-            border-radius: 2px;
-            font-weight: 500;
-            font-size: 0.95rem;
-            letter-spacing: 0.5px;
-            transition: var(--transition);
-            border: 1px solid transparent;
-            cursor: pointer;
-        }
-
-        .btn-primary {
-            background: var(--gold);
-            color: var(--navy-900);
-        }
-
-        .btn-primary:hover {
-            background: var(--gold-light);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(201, 169, 97, 0.3);
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: var(--white);
-            border-color: rgba(255, 255, 255, 0.3);
-        }
-
-        .btn-outline:hover {
-            border-color: var(--gold);
-            color: var(--gold);
-        }
-
-        /* Hero photo */
-        .hero-photo {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .hero-photo-frame {
-            position: relative;
-            width: 100%;
-            max-width: 480px;
-            aspect-ratio: 3 / 4;
-            border-radius: 4px;
-            overflow: hidden;
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(201, 169, 97, 0.2);
-        }
-
-        .hero-photo-frame::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, transparent 50%, rgba(10, 25, 41, 0.4) 100%);
-            z-index: 1;
-            pointer-events: none;
-        }
-
-        .hero-photo-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        .hero-photo-badge {
-            position: absolute;
-            bottom: -30px;
-            left: -30px;
-            background: var(--white);
-            padding: 1.5rem 2rem;
-            border-radius: 4px;
-            box-shadow: var(--shadow-lg);
-            z-index: 2;
-        }
-
-        .hero-photo-badge .number {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--navy-900);
-            line-height: 1;
-        }
-
-        .hero-photo-badge .label {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--gray-600);
-            margin-top: 0.25rem;
-        }
-
-        /* ============================================
-           SECTION BASE
-           ============================================ */
-        section {
-            padding: 7rem 2.5rem;
-            width: 100%;
-        }
-
-        .section-container {
-            max-width: 1280px;
-            margin: 0 auto;
-        }
-
-        .section-header {
-            text-align: center;
-            max-width: 720px;
-            margin: 0 auto 4.5rem;
-        }
-
-        .section-eyebrow {
-            display: inline-block;
-            font-size: 0.8rem;
-            font-weight: 600;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--gold);
-            margin-bottom: 1rem;
-        }
-
-        .section-title {
-            font-size: 2.75rem;
-            color: var(--navy-900);
-            margin-bottom: 1rem;
-        }
-
-        .section-subtitle {
-            font-size: 1.1rem;
-            color: var(--gray-600);
-            font-weight: 300;
-        }
-
-        /* ============================================
-           ABOUT SECTION
-           ============================================ */
-        .about {
-            background: var(--white);
-        }
-
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1.5fr;
-            gap: 5rem;
-            align-items: start;
-        }
-
-        .about-visual {
-            position: relative;
-        }
-
-        .about-visual img {
-            width: 100%;
-            border-radius: 4px;
-            box-shadow: var(--shadow-lg);
-        }
-
-        .about-visual::after {
-            content: '';
-            position: absolute;
-            top: 30px;
-            left: 30px;
-            right: -30px;
-            bottom: -30px;
-            border: 2px solid var(--gold);
-            border-radius: 4px;
-            z-index: -1;
-        }
-
-        .about-text h3 {
-            font-size: 2rem;
-            color: var(--navy-900);
-            margin-bottom: 1.5rem;
-        }
-
-        .about-text p {
-            font-size: 1.05rem;
-            color: var(--gray-600);
-            margin-bottom: 1.25rem;
-        }
-
-        .credentials {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.25rem;
-            margin-top: 2.5rem;
-            padding-top: 2.5rem;
-            border-top: 1px solid var(--gray-100);
-        }
-
-        .credential-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-        }
-
-        .credential-item svg {
-            flex-shrink: 0;
-            width: 28px;
-            height: 28px;
-            color: var(--gold);
-        }
-
-        .credential-item .text strong {
-            display: block;
-            font-size: 1.5rem;
-            font-family: 'Playfair Display', serif;
-            color: var(--navy-900);
-            font-weight: 700;
-        }
-
-        .credential-item .text span {
-            font-size: 0.85rem;
-            color: var(--gray-600);
-            letter-spacing: 0.5px;
-        }
-
-        /* ============================================
-           SERVICES SECTION
-           ============================================ */
-        .services {
-            background: var(--cream);
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .service-card {
-            background: var(--white);
-            padding: 2.75rem 2.25rem;
-            border-radius: 4px;
-            transition: var(--transition);
-            border: 1px solid var(--gray-100);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: var(--gold);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: var(--transition);
-        }
-
-        .service-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-lg);
-            border-color: transparent;
-        }
-
-        .service-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .service-icon {
-            width: 56px;
-            height: 56px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--navy-900);
-            border-radius: 50%;
-            margin-bottom: 1.75rem;
-            color: var(--gold);
-            transition: var(--transition);
-        }
-
-        .service-card:hover .service-icon {
-            background: var(--gold);
-            color: var(--navy-900);
-        }
-
-        .service-icon svg {
-            width: 28px;
-            height: 28px;
-        }
-
-        .service-card h3 {
-            font-size: 1.35rem;
-            color: var(--navy-900);
-            margin-bottom: 1rem;
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
-            letter-spacing: -0.3px;
-        }
-
-        .service-card p {
-            color: var(--gray-600);
-            font-size: 0.95rem;
-            line-height: 1.7;
-        }
-
-        /* ============================================
-           SKILLS SECTION
-           ============================================ */
-        .skills {
-            background: var(--navy-900);
-            color: var(--white);
-            position: relative;
-        }
-
-        .skills .section-title {
-            color: var(--white);
-        }
-
-        .skills .section-subtitle {
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 4rem;
-        }
-
-        .skills-list {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0.5rem 3rem;
-        }
-
-        .skill-item {
-            display: flex;
-            align-items: center;
-            gap: 0.85rem;
-            padding: 0.85rem 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            font-size: 0.95rem;
-            color: rgba(255, 255, 255, 0.85);
-            transition: var(--transition);
-        }
-
-        .skill-item:hover {
-            color: var(--gold);
-            padding-left: 0.5rem;
-        }
-
-        .skill-item::before {
-            content: '';
-            width: 6px;
-            height: 6px;
-            background: var(--gold);
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
-
-        .tools-box {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(201, 169, 97, 0.2);
-            border-radius: 4px;
-            padding: 2.5rem;
-        }
-
-        .tools-box h3 {
-            font-size: 1.1rem;
-            color: var(--gold);
-            margin-bottom: 1.5rem;
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        .tools-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.6rem;
-        }
-
-        .tool-tag {
-            background: rgba(201, 169, 97, 0.1);
-            border: 1px solid rgba(201, 169, 97, 0.3);
-            color: var(--white);
-            padding: 0.55rem 1.1rem;
-            border-radius: 2px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            transition: var(--transition);
-        }
-
-        .tool-tag:hover {
-            background: var(--gold);
-            color: var(--navy-900);
-            border-color: var(--gold);
-        }
-
-        /* ============================================
-           PORTFOLIO SECTION
-           ============================================ */
-        .portfolio {
-            background: var(--white);
-        }
-
-        .portfolio-category {
-            margin-bottom: 4rem;
-        }
-
-        .portfolio-category:last-of-type {
-            margin-bottom: 0;
-        }
-
-        .category-header {
-            display: flex;
-            align-items: baseline;
-            justify-content: space-between;
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid var(--gray-100);
-        }
-
-        .category-header h3 {
-            font-size: 1.5rem;
-            color: var(--navy-900);
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
-        }
-
-        .category-header .count {
-            font-size: 0.85rem;
-            color: var(--gray-400);
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        /* Featured Video Block */
-        .featured-video {
-            margin-bottom: 2.5rem;
-            background: var(--gray-50);
-            border: 1px solid var(--gray-100);
-            border-radius: 4px;
-            overflow: hidden;
-            box-shadow: var(--shadow-sm);
-            transition: var(--transition);
-        }
-
-        .featured-video:hover {
-            box-shadow: var(--shadow-md);
-        }
-
-        .featured-video video {
-            width: 100%;
-            display: block;
-            background: #000;
-        }
-
-        .featured-video-caption {
-            padding: 1.25rem 1.75rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .featured-video-caption .caption-text {
-            display: flex;
-            align-items: center;
-            gap: 0.85rem;
-        }
-
-        .featured-video-caption .caption-text svg {
-            width: 22px;
-            height: 22px;
-            color: var(--gold);
-            flex-shrink: 0;
-        }
-
-        .featured-video-caption .caption-text strong {
-            display: block;
-            font-size: 1rem;
-            color: var(--navy-900);
-            font-weight: 600;
-        }
-
-        .featured-video-caption .caption-text span {
-            font-size: 0.85rem;
-            color: var(--gray-400);
-        }
-
-        .featured-video-caption .caption-tag {
-            background: var(--navy-900);
-            color: var(--gold);
-            font-size: 0.7rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            padding: 0.4rem 0.85rem;
-            border-radius: 2px;
-            font-weight: 600;
-        }
-
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-        }
-
-        .portfolio-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 4px;
-            box-shadow: var(--shadow-sm);
-            transition: var(--transition);
-            background: var(--gray-50);
-            aspect-ratio: 4 / 3;
-        }
-
-        .portfolio-item:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .portfolio-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            transition: var(--transition);
-        }
-
-        .portfolio-item:hover img {
-            transform: scale(1.05);
-        }
-
-        .portfolio-item .overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, transparent 50%, rgba(10, 25, 41, 0.85) 100%);
-            opacity: 0;
-            transition: var(--transition);
-            display: flex;
-            align-items: flex-end;
-            padding: 1.5rem;
-        }
-
-        .portfolio-item:hover .overlay {
-            opacity: 1;
-        }
-
-        .portfolio-item .overlay span {
-            color: var(--white);
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-
-        .portfolio-links {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1rem;
-            margin-top: 4rem;
-            padding-top: 3rem;
-            border-top: 1px solid var(--gray-100);
-        }
-
-        .portfolio-link {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1.25rem 1.5rem;
-            background: var(--gray-50);
-            border: 1px solid var(--gray-100);
-            border-radius: 4px;
-            text-decoration: none;
-            color: var(--navy-900);
-            font-weight: 500;
-            transition: var(--transition);
-        }
-
-        .portfolio-link svg {
-            width: 20px;
-            height: 20px;
-            color: var(--gold);
-            flex-shrink: 0;
-        }
-
-        .portfolio-link:hover {
-            background: var(--navy-900);
-            color: var(--white);
-            border-color: var(--navy-900);
-            transform: translateX(4px);
-        }
-
-        .portfolio-link:hover svg {
-            color: var(--gold);
-        }
-
-        /* ============================================
-           EXPERIENCE SECTION
-           ============================================ */
-        .experience {
-            background: var(--cream);
-        }
-
-        .timeline {
-            max-width: 900px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(180deg, var(--gold) 0%, var(--gray-200) 100%);
-        }
-
-        .timeline-item {
-            background: var(--white);
-            padding: 2.5rem;
-            margin-bottom: 2rem;
-            margin-left: 2.5rem;
-            border-radius: 4px;
-            box-shadow: var(--shadow-sm);
-            position: relative;
-            transition: var(--transition);
-            border: 1px solid var(--gray-100);
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -3.1rem;
-            top: 2.75rem;
-            width: 14px;
-            height: 14px;
-            background: var(--gold);
-            border: 3px solid var(--white);
-            border-radius: 50%;
-            box-shadow: 0 0 0 2px var(--gold);
-        }
-
-        .timeline-item:hover {
-            box-shadow: var(--shadow-md);
-            transform: translateX(4px);
-        }
-
-        .timeline-item h3 {
-            font-size: 1.35rem;
-            color: var(--navy-900);
-            margin-bottom: 0.35rem;
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
-        }
-
-        .timeline-item .company {
-            font-size: 1rem;
-            color: var(--gold);
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            letter-spacing: 0.5px;
-        }
-
-        .timeline-item .date {
-            color: var(--gray-400);
-            font-size: 0.85rem;
-            margin-bottom: 1.25rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .timeline-item ul {
-            margin-left: 1.25rem;
-            color: var(--gray-600);
-        }
-
-        .timeline-item ul li {
-            margin-bottom: 0.6rem;
-            line-height: 1.6;
-            font-size: 0.95rem;
-        }
-
-        /* ============================================
-           EDUCATION & CERTIFICATIONS
-           ============================================ */
-        .education {
-            background: var(--white);
-        }
-
-        .edu-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .edu-card {
-            background: var(--gray-50);
-            padding: 2.5rem;
-            border-radius: 4px;
-            border: 1px solid var(--gray-100);
-            transition: var(--transition);
-        }
-
-        .edu-card:hover {
-            border-color: var(--gold);
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .edu-card h3 {
-            font-size: 1.1rem;
-            color: var(--navy-900);
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 2px solid var(--gold);
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        .edu-card ul {
-            list-style: none;
-        }
-
-        .edu-card ul li {
-            padding: 0.85rem 0;
-            color: var(--gray-600);
-            border-bottom: 1px solid var(--gray-100);
-            font-size: 0.95rem;
-        }
-
-        .edu-card ul li:last-child {
-            border-bottom: none;
-        }
-
-        .edu-card ul li strong {
-            display: block;
-            color: var(--navy-900);
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-        }
-
-        .edu-card ul li span {
-            font-size: 0.85rem;
-            color: var(--gray-400);
-        }
-
-        /* ============================================
-           CONTACT SECTION
-           ============================================ */
-        .contact {
-            background: var(--navy-900);
-            color: var(--white);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .contact::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 1000px;
-            height: 1000px;
-            background: radial-gradient(circle, rgba(201, 169, 97, 0.08) 0%, transparent 60%);
-            border-radius: 50%;
-        }
-
-        .contact .section-container {
-            position: relative;
-            z-index: 1;
-        }
-
-        .contact .section-title {
-            color: var(--white);
-        }
-
-        .contact .section-subtitle {
-            color: rgba(255, 255, 255, 0.7);
-            max-width: 600px;
-            margin: 0 auto 3rem;
-        }
-
-        .contact-card {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(201, 169, 97, 0.3);
-            padding: 2.5rem 4rem;
-            border-radius: 4px;
-            margin-bottom: 2.5rem;
-            transition: var(--transition);
-        }
-
-        .contact-card:hover {
-            border-color: var(--gold);
-            background: rgba(201, 169, 97, 0.05);
-        }
-
-        .contact-card .label {
-            font-size: 0.8rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--gold);
-            margin-bottom: 0.75rem;
-        }
-
-        .contact-card a {
-            color: var(--white);
-            text-decoration: none;
-            font-size: 1.35rem;
-            font-weight: 500;
-            transition: var(--transition);
-        }
-
-        .contact-card a:hover {
-            color: var(--gold);
-        }
-
-        /* ============================================
-           FOOTER
-           ============================================ */
-        footer {
-            background: #050f1c;
-            color: rgba(255, 255, 255, 0.5);
-            text-align: center;
-            padding: 2.5rem;
-            font-size: 0.85rem;
-            letter-spacing: 0.5px;
-        }
-
-        footer span {
-            color: var(--gold);
-        }
-
-        /* ============================================
-           RESPONSIVE DESIGN
-           ============================================ */
-        @media (max-width: 1024px) {
-            .hero .container {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-                text-align: center;
-            }
-
-            .hero-content h1 {
-                font-size: 3.5rem;
-            }
-
-            .hero-buttons {
-                justify-content: center;
-            }
-
-            .hero-content .tagline {
-                margin-left: auto;
-                margin-right: auto;
-            }
-
-            .hero-photo-frame {
-                max-width: 380px;
-                margin: 0 auto;
-            }
-
-            .about-grid {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-
-            .about-visual {
-                max-width: 400px;
-                margin: 0 auto;
-            }
-
-            .services-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .skills-grid {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-
-            .portfolio-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .edu-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 640px) {
-            section {
-                padding: 5rem 1.5rem;
-            }
-
-            nav .container {
-                padding: 0 1.5rem;
-            }
-
-            nav ul {
-                gap: 1.25rem;
-                font-size: 0.85rem;
-            }
-
-            .hero .container {
-                padding: 2.5rem 1.5rem 3rem;
-            }
-
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero-content .role {
-                font-size: 1.1rem;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .skills-list {
-                grid-template-columns: 1fr;
-            }
-
-            .portfolio-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .credentials {
-                grid-template-columns: 1fr;
-            }
-
-            .timeline-item {
-                padding: 1.75rem;
-                margin-left: 2rem;
-            }
-
-            .contact-card {
-                padding: 2rem;
-            }
-
-            .hero-photo-badge {
-                bottom: -20px;
-                left: -10px;
-                padding: 1rem 1.25rem;
-            }
-
-            .hero-photo-badge .number {
-                font-size: 2rem;
-            }
-
-            .featured-video-caption {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-        }
-    </style>
-</head>
-<body>
-
-    <!-- ============================================
-         NAVIGATION — Light Navy Background
-         ============================================ -->
-    <nav>
-        <div class="container">
-            <a href="#" class="logo">Lusvard<span>.</span></a>
+{%- comment -%}
+  ÉTOFFE: Natural Materials landing page, English (default) / Français / Русский
+  Paste into ONE "Custom Liquid" section. Language follows the Shopify language selector (html lang).
+  Each text exists three times: class="text-en", "text-fr", "text-ru".
+{%- endcomment -%}
+
+{%- assign meta = "Cashmere|Cachemire|Кашемир|cashmere|The softest, lightest kind of warmth.|La chaleur la plus douce et la plus légère.|Самое мягкое и лёгкое тепло.|Pullovers, cardigans, scarves|Pulls, cardigans, écharpes|Свитеры, кардиганы, шарфы|Hand wash cool, dry flat|Lavage à la main à l’eau froide, séchage à plat|Ручная стирка в холодной воде, сушка в расправленном виде|Shop Cashmere|Voir le cachemire|Смотреть кашемир~Wool|Laine|Шерсть|wool|Warm, durable and naturally breathable.|Chaude, résistante et naturellement respirante.|Тёплая, прочная и естественно дышащая.|Coats, trousers, knitwear|Manteaux, pantalons, maille|Пальто, брюки, трикотаж|Air it out, brush it, store folded|Aérer, brosser, ranger pliée|Проветривать, чистить щёткой, хранить сложенной|Shop Wool|Voir la laine|Смотреть шерсть~Leather|Cuir|Кожа|frontpage|A material that gains character with every year.|Une matière qui prend du caractère avec les années.|Материал, который с каждым годом становится характернее.|Jackets, belts, bags, shoes|Vestes, ceintures, sacs, chaussures|Куртки, ремни, сумки, обувь|Condition twice a year, keep away from heat|Nourrir deux fois par an, éloigner de la chaleur|Питать два раза в год, беречь от тепла|Shop Leather|Voir le cuir|Смотреть кожу~Silk|Soie|Шёлк|silk|Light, smooth and quietly elegant.|Légère, fluide et discrètement élégante.|Лёгкий, гладкий и сдержанно элегантный.|Blouses, dresses, scarves|Chemisiers, robes, foulards|Блузы, платья, шарфы|Gentle hand wash, never wring|Lavage doux à la main, sans tordre|Бережная ручная стирка, не выкручивать|Shop Silk|Voir la soie|Смотреть шёлк" | split: '~' -%}
+
+{%- assign allp = "Blazer with Removable Vest|blazer-with-removable-vest|https://cdn.shopify.com/s/files/1/1002/2207/5190/files/falconeri_blazer_removable_vest_close.webp?v=1789945838~Maxi Cashmere Cardigan|maxi-cashmere-cardigan|https://cdn.shopify.com/s/files/1/1002/2207/5190/files/npeal_maxi_black.webp?v=1789945175~Cashmere Blend Pullover in Beige|cashmere-mischung-pullover-in-beige|https://cdn.shopify.com/s/files/1/1002/2207/5190/files/allude_beige_pullover_left.webp?v=1789947135~Ribbed Full-Zip Cashmere Jumper|ribbed-full-zip-cashmere-jumper|https://cdn.shopify.com/s/files/1/1002/2207/5190/files/npeal_white.webp?v=1789944083#Chapel Double-Face Cashmere Cape Coat, JOSEPH|chapel-double-face-cashmere-cape-coat-joseph|https://cdn.shopify.com/s/files/1/1002/2207/5190/files/JOSEPH_AW26_CAMPAIGN_260723_0002_221.webp?v=1791563859~Tides Virgin Wool Coat, JOSEPH|tides-virgin-wool-coat-joseph|https://cdn.shopify.com/s/files/1/1002/2207/5190/files/tides-virgin-wool-coat-white-jf0102661119-3.webp?v=1791563078~Wool and Cashmere Two-Tone Coat|wool-and-cashmere-two-tone-coat|https://cdn.shopify.com/s/files/1/1002/2207/5190/files/falconeri_blazer_cashm_wool_close.jpg?v=1789946338~Wool Blend Pullover|woll-mischung-pullover|https://cdn.shopify.com/s/files/1/1002/2207/5190/files/allude-wolle-pullover_beige.webp?v=1789947830#Matlock Embossed Woven Leather Coat, JOSEPH|matlock-embossed-woven-leather-coat-joseph|https://cdn.shopify.com/s/files/1/1002/2207/5190/files/Look05_Joseph_AW26_4154_2c01f8db-a891-44e2-ac29-d4539b0a06c4.webp?v=1791562616~Calver Pleated Nappa Leather Dress, JOSEPH|calver-pleated-nappa-leather-dress-joseph|https://cdn.shopify.com/s/files/1/1002/2207/5190/files/JOSEPH_AW26_CAMPAIGN_260723_0010_984.webp?v=1790781704~Jumbo Loaf Leather Bag, JOSEPH|jumbo-loaf-leather-bag-joseph|https://cdn.shopify.com/s/files/1/1002/2207/5190/files/jumbo-loaf-leather-bag-brown-jf0103232207-2_1.jpg?v=1792449946~Bean Leather Bag, JOSEPH|bean-leather-bag-joseph|https://cdn.shopify.com/s/files/1/1002/2207/5190/files/JOSEPH_SS26_LOOKBOOK_LOOK_4_0077_4x5__2160x2700_8f091381-9993-44dc-8769-f1672339658b.jpg?v=1792160283#2.55|2-55|https://cdn.shopify.com/s/files/1/1002/2207/5190/files/Screenshot2026-09-24101339.png?v=1790230479~Partie Fine Evening Dress, Christian Dior|partie-fine-evening-dress-christian-dior|https://cdn.shopify.com/s/files/1/1002/2207/5190/files/Screenshot2026-09-24041146_a63c4a92-d906-4e79-9de5-ed4c0dfa5920.png?v=1790209201~Cashmere and Silk Jacket|cashmere-and-silk-jacket|https://cdn.shopify.com/s/files/1/1002/2207/5190/files/danica-silk-scarf-brown-jf0099700574-3_88621b9c-2f4c-4dd0-b977-4122e244dacc.webp?v=1791906735~Sarry Crêpe de Soie Silk Scarf|sarry-crepe-de-soie-silk-scarf|https://cdn.shopify.com/s/files/1/1002/2207/5190/files/sarry-crepe-de-soie-silk-scarf-blue-jf0102150386-7.webp?v=1792447872" | split: '#' -%}
+
+{%- assign size_eu = "34|80–82|60–62|86–88~36|84–86|64–66|90–92~38|88–90|68–70|94–96~40|92–94|72–74|98–100~42|96–98|76–78|102–104~44|100–102|80–82|106–108" -%}
+{%- assign size_us = "2|31.5–32.5|23.5–24.5|34–35~4|33–34|25–26|35.5–36.5~6|34.5–35.5|26.5–27.5|37–38~8|36–37|28–29|38.5–39.5~10|37.5–38.5|29.5–30.5|40–41~12|39–40|31–32|41.5–42.5" -%}
+{%- assign size_uk = "6|31.5–32.5|23.5–24.5|34–35~8|33–34|25–26|35.5–36.5~10|34.5–35.5|26.5–27.5|37–38~12|36–37|28–29|38.5–39.5~14|37.5–38.5|29.5–30.5|40–41~16|39–40|31–32|41.5–42.5" -%}
+{%- assign care = "Hand wash in cool water with a gentle wool shampoo; never wring or twist.|Lavez à la main à l’eau froide avec un shampooing doux pour laine ; ne tordez jamais.|Стирайте вручную в прохладной воде с мягким средством для шерсти; не выкручивайте и не перекручивайте.|Dry flat on a clean towel, away from direct heat and sun.|Séchez à plat sur une serviette propre, à l’abri de la chaleur directe et du soleil.|Сушите в расправленном виде на чистом полотенце, вдали от прямого тепла и солнца.|Fold to store, never hang, and keep with cedar to deter moths.|Rangez pliée, jamais sur cintre, avec du cèdre contre les mites.|Храните сложенным, не на вешалке, и кладите кедр от моли.~Air it out after wearing and brush gently with a soft clothes brush.|Aérez-la après le port et brossez-la délicatement avec une brosse douce.|Проветривайте после носки и аккуратно чистите мягкой щёткой для одежды.|Wash rarely, in cool water with a wool detergent, or choose dry cleaning for coats.|Lavez rarement, à l’eau froide avec une lessive pour laine, ou optez pour le nettoyage à sec pour les manteaux.|Стирайте редко, в прохладной воде со средством для шерсти, а пальто лучше сдавать в химчистку.|Store folded or on a wide hanger, with space to breathe.|Rangez pliée ou sur un cintre large, avec de l’espace pour respirer.|Храните сложенной или на широких плечиках, оставляя место для воздуха.~Wipe with a soft, slightly damp cloth and let it dry naturally.|Essuyez avec un chiffon doux légèrement humide et laissez sécher naturellement.|Протирайте мягкой слегка влажной тканью и давайте высохнуть естественным образом.|Condition twice a year to keep it supple and prevent cracking.|Nourrissez deux fois par an pour la garder souple et éviter les craquelures.|Питайте кожу два раза в год, чтобы она оставалась мягкой и не трескалась.|Keep away from heat and direct sun; stuff bags to hold their shape.|Éloignez de la chaleur et du soleil direct ; bourrez les sacs pour garder leur forme.|Берегите от тепла и прямого солнца; набивайте сумки, чтобы они держали форму.~Hand wash gently in cool water with a mild detergent; never wring.|Lavez délicatement à la main à l’eau froide avec une lessive douce ; sans tordre.|Бережно стирайте вручную в прохладной воде мягким средством; не выкручивайте.|Roll in a towel to remove water and dry in the shade.|Roulez dans une serviette pour retirer l’eau et laissez sécher à l’ombre.|Отожмите, свернув в полотенце, и сушите в тени.|Iron on low heat on the reverse side, and store away from sunlight.|Repassez à basse température sur l’envers et rangez à l’abri de la lumière.|Гладьте на низкой температуре с изнаночной стороны и храните вдали от солнечного света." | split: '~' -%}
+{%- assign regs = 'eu,us,uk,fr' | split: ',' -%}
+{%- assign hero_img = "https://cdn.shopify.com/s/files/1/1002/2207/5190/files/JOSEPH_AW26_CAMPAIGN_260723_0002_221.webp?v=1791563859" -%}
+{%- assign offer_img = "https://cdn.shopify.com/s/files/1/1002/2207/5190/files/Look05_Joseph_AW26_4154_2c01f8db-a891-44e2-ac29-d4539b0a06c4.webp?v=1791562616" -%}
+{%- assign root = routes.root_url -%}
+
+{%- assign problems = "It pills after a few washes.|Synthetic blends lose their shape and their softness within a season.|Il bouloche après quelques lavages.|Les mélanges synthétiques perdent leur forme et leur douceur en une saison.|Скатывается после нескольких стирок.|Синтетические смеси теряют форму и мягкость за один сезон.~Hard to tell what is real.|“Cashmere” on a label does not always mean cashmere.|Difficile de savoir ce qui est vrai.|« Cachemire » sur une étiquette ne signifie pas toujours cachemire.|Трудно понять, что настоящее.|Надпись «кашемир» на этикетке не всегда означает кашемир.~Vague labels.|You pay for quality but cannot see what the piece is made of.|Étiquettes floues.|Vous payez la qualité sans voir de quoi la pièce est faite.|Расплывчатые этикетки.|Вы платите за качество, но не видите, из чего сделана вещь.~Replaced every year.|Cheap pieces cost more in the long run.|À remplacer chaque année.|Les pièces bon marché coûtent plus cher à la longue.|Приходится менять каждый год.|Дешёвые вещи со временем обходятся дороже." | split: '~' -%}
+{%- assign benefits = "Real fibres.|Natural materials, with the composition listed on every piece.|Des fibres authentiques.|Des matières naturelles, avec la composition indiquée sur chaque pièce.|Настоящие волокна.|Натуральные материалы, состав указан для каждой вещи.~Made to last.|Well-made pieces improve with wear instead of wearing out.|Faites pour durer.|Les pièces bien faites se patinent au lieu de s’user.|Сделано на века.|Хорошо сделанные вещи со временем становятся лучше, а не изнашиваются.~Comfortable all day.|Natural fibres breathe and regulate temperature.|Confortables toute la journée.|Les fibres naturelles respirent et régulent la température.|Комфорт весь день.|Натуральные волокна дышат и регулируют температуру.~Curated houses.|Trusted brands in one place, chosen by hand.|Maisons sélectionnées.|Des marques de confiance réunies au même endroit, choisies à la main.|Отобранные дома.|Проверенные бренды в одном месте, выбранные вручную.~Timeless style.|Pieces you will still wear in five years.|Un style intemporel.|Des pièces que vous porterez encore dans cinq ans.|Вне времени.|Вещи, которые вы будете носить и через пять лет.~Buy less, wear longer.|A kinder choice for your wardrobe and the planet.|Acheter moins, porter plus longtemps.|Un choix plus doux pour votre garde-robe et la planète.|Покупайте меньше, носите дольше.|Бережный выбор для вашего гардероба и планеты." | split: '~' -%}
+{%- assign glyphs = "✦,❖,❦,✿,◈,☙" | split: ',' -%}
+{%- assign steps = "We choose the house.|Only brands with a real commitment to craft.|Nous choisissons la maison.|Uniquement des marques réellement attachées au savoir-faire.|Мы выбираем дом.|Только бренды, по-настоящему преданные мастерству.~We check the fibre.|Composition confirmed before a piece is listed.|Nous vérifions la fibre.|Composition confirmée avant la mise en ligne de chaque pièce.|Мы проверяем волокно.|Состав подтверждается до того, как вещь попадает в каталог.~We describe it honestly.|What it is made of, how it feels, how to care for it.|Nous décrivons honnêtement.|De quoi elle est faite, son toucher, comment l’entretenir.|Мы описываем честно.|Из чего сделана вещь, какова она на ощупь и как за ней ухаживать.~We pack it with care.|Wrapped and shipped like a gift.|Nous emballons avec soin.|Emballée et expédiée comme un cadeau.|Мы упаковываем с заботой.|Упаковано и отправлено как подарок." | split: '~' -%}
+{%- assign reviews = "The cashmere pullover is unbelievably soft and has kept its shape after several washes. Exactly what I was looking for.|Le pull en cachemire est incroyablement doux et a gardé sa forme après plusieurs lavages. Exactement ce que je cherchais.|Кашемировый свитер невероятно мягкий и сохранил форму после нескольких стирок. Именно то, что я искала.|Camille D.|France|France|Франция~Beautiful packaging and the silk scarf looks even better in person. It arrived like a gift.|Un emballage magnifique, et le foulard en soie est encore plus beau en vrai. Il est arrivé comme un cadeau.|Прекрасная упаковка, а шёлковый шарф вживую ещё красивее. Он пришёл как подарок.|Katarzyna W.|Poland|Pologne|Польша~I love that the fibre is listed on every piece. The wool coat feels truly well made.|J’adore que la fibre soit indiquée sur chaque pièce. Le manteau en laine est vraiment bien fait.|Мне нравится, что состав указан у каждой вещи. Шерстяное пальто действительно качественно сделано.|Élodie V.|Belgium|Belgique|Бельгия" | split: '~' -%}
+{%- assign compare = "Fibres|Natural, clearly listed|Often synthetic, vague|Fibres|Naturelles, clairement indiquées|Souvent synthétiques, floues|Волокна|Натуральные, состав указан чётко|Часто синтетика, состав размыт~Lifespan|Years|One or two seasons|Durée de vie|Des années|Une ou deux saisons|Срок службы|Годы|Один-два сезона~Comfort|Breathable|Traps heat|Confort|Respirant|Retient la chaleur|Комфорт|Дышит|Не пропускает воздух~Transparency|Brand and material shown|Little information|Transparence|Marque et matière indiquées|Peu d’informations|Прозрачность|Указаны бренд и материал|Мало информации~Care|Simple guides included|Unclear|Entretien|Guides simples fournis|Peu clair|Уход|Простые инструкции в комплекте|Не всегда понятно~Cost per wear|Low over time|Rises as you replace|Coût par port|Faible sur la durée|Augmente à chaque remplacement|Стоимость одной носки|Снижается со временем|Растёт с каждой заменой" | split: '~' -%}
+{%- assign faq = "How can I tell real cashmere?|Check the label for 100% cashmere. Real cashmere feels soft without being shiny and pills only lightly. Every cashmere piece we sell lists its composition.|Comment reconnaître le vrai cachemire ?|Vérifiez que l’étiquette indique 100 % cachemire. Le vrai cachemire est doux sans être brillant et ne bouloche que légèrement. Chaque pièce en cachemire que nous vendons indique sa composition.|Как отличить настоящий кашемир?|Проверьте, что на этикетке указано 100% кашемир. Настоящий кашемир мягкий, но не блестящий, и лишь слегка скатывается. Для каждой кашемировой вещи у нас указан состав.~Is wool itchy?|Fine merino and wool blends are soft against the skin. We note the fibre type on each product.|La laine gratte-t-elle ?|Le mérinos fin et les mélanges de laine sont doux sur la peau. Nous indiquons le type de fibre sur chaque produit.|Колется ли шерсть?|Тонкий мериносовый и смесовые шерстяные материалы мягки для кожи. Тип волокна указан для каждого товара.~How do I wash silk?|Hand wash gently in cool water and never wring. See our care guides in the Journal for full steps.|Comment laver la soie ?|Lavez-la délicatement à la main à l’eau froide, sans la tordre. Consultez nos guides d’entretien dans le Journal pour le détail des étapes.|Как стирать шёлк?|Стирайте бережно вручную в прохладной воде, не выкручивая. Подробные инструкции есть в наших руководствах по уходу в Журнале.~Is the leather genuine?|Yes, every leather piece is made from genuine leather and listed as such.|Votre cuir est-il authentique ?|Oui, chaque pièce en cuir est réalisée en cuir véritable et présentée comme telle.|Ваша кожа натуральная?|Да, каждая кожаная вещь сделана из натуральной кожи и указана как таковая.~How long does delivery take?|Estimated delivery times are shown at checkout, and orders over 415 USD ship free.|Quels sont les délais de livraison ?|Les délais estimés s’affichent lors du paiement, et les commandes de plus de 415 USD sont livrées gratuitement.|Сколько занимает доставка?|Ориентировочные сроки показаны при оформлении заказа, а заказы от 415 USD доставляются бесплатно." | split: '~' -%}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Jost:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  /* ===== HIDE HEADER, FOOTER, ANNOUNCEMENT BAR & OTHER SECTIONS ===== */
+  #shopify-section-announcement-bar,
+  .announcement-bar,
+  .shopify-section-announcement-bar {
+    display: none !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    visibility: hidden !important;
+  }
+
+  #shopify-section-header,
+  .shopify-section-header,
+  header.header,
+  header.site-header,
+  .header-wrapper,
+  .header,
+  .site-header,
+  .shopify-section-group-header-group {
+    display: none !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    visibility: hidden !important;
+  }
+
+  #shopify-section-footer,
+  .shopify-section-footer,
+  footer.footer,
+  footer.site-footer,
+  .footer,
+  .site-footer,
+  .shopify-section-group-footer-group {
+    display: none !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    visibility: hidden !important;
+  }
+
+  /* Hide any other custom liquid sections placed before/after this landing page */
+  .shopify-section:not(:has(.nf)) {
+    display: none !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    visibility: hidden !important;
+  }
+
+  /* Remove leftover spacing from main content */
+  #MainContent,
+  main#MainContent,
+  main {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  /* Remove body top padding if any */
+  body {
+    padding-top: 0 !important;
+  }
+
+  /* language switching: English default, French and Russian follow html lang */
+  .text-fr, .text-ru { display:none; }
+  html[lang^="fr"] .text-en, html[lang^="ru"] .text-en { display:none; }
+  html[lang^="fr"] .text-fr { display:inline; }
+  html[lang^="ru"] .text-ru { display:inline; }
+
+  html:has(.nf) { overflow-x:clip; scroll-behavior:smooth; }
+  .nf { --green:#1E3229; --deep:#142619; --gold:#c9a45c; --antique:#d4b06a; --ivory:#F8F3EA; --burg:#4a1525;
+        --serif:'Cormorant Garamond',Georgia,serif; --sans:'Jost','Helvetica Neue',Arial,sans-serif;
+        --c1:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120' fill='none' stroke='%23c9a45c' stroke-width='1.4' stroke-linecap='round' stroke-opacity='.8'%3E%3Cpath d='M4 116V34Q4 4 34 4H116'/%3E%3Cpath d='M14 116V40Q14 14 40 14H116' stroke-opacity='.55'/%3E%3Cpath d='M30 30C48 30 58 40 56 54C54 66 40 68 34 60C28 52 36 44 44 48'/%3E%3Cpath d='M14 62C26 64 32 72 30 84M62 14C64 26 72 32 84 30' stroke-opacity='.7'/%3E%3Ccircle cx='30' cy='30' r='2.6' fill='%23c9a45c' stroke='none'/%3E%3Ccircle cx='112' cy='9' r='2' fill='%23c9a45c' stroke='none'/%3E%3Ccircle cx='9' cy='112' r='2' fill='%23c9a45c' stroke='none'/%3E%3C/svg%3E"); --c2:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120' fill='none' stroke='%23c9a45c' stroke-width='1.4' stroke-linecap='round' stroke-opacity='.8'%3E%3Cg transform='translate%28120 0%29 scale%28-1 1%29'%3E%3Cpath d='M4 116V34Q4 4 34 4H116'/%3E%3Cpath d='M14 116V40Q14 14 40 14H116' stroke-opacity='.55'/%3E%3Cpath d='M30 30C48 30 58 40 56 54C54 66 40 68 34 60C28 52 36 44 44 48'/%3E%3Cpath d='M14 62C26 64 32 72 30 84M62 14C64 26 72 32 84 30' stroke-opacity='.7'/%3E%3Ccircle cx='30' cy='30' r='2.6' fill='%23c9a45c' stroke='none'/%3E%3Ccircle cx='112' cy='9' r='2' fill='%23c9a45c' stroke='none'/%3E%3Ccircle cx='9' cy='112' r='2' fill='%23c9a45c' stroke='none'/%3E%3C/g%3E%3C/svg%3E"); --c3:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120' fill='none' stroke='%23c9a45c' stroke-width='1.4' stroke-linecap='round' stroke-opacity='.8'%3E%3Cg transform='translate%280 120%29 scale%281 -1%29'%3E%3Cpath d='M4 116V34Q4 4 34 4H116'/%3E%3Cpath d='M14 116V40Q14 14 40 14H116' stroke-opacity='.55'/%3E%3Cpath d='M30 30C48 30 58 40 56 54C54 66 40 68 34 60C28 52 36 44 44 48'/%3E%3Cpath d='M14 62C26 64 32 72 30 84M62 14C64 26 72 32 84 30' stroke-opacity='.7'/%3E%3Ccircle cx='30' cy='30' r='2.6' fill='%23c9a45c' stroke='none'/%3E%3Ccircle cx='112' cy='9' r='2' fill='%23c9a45c' stroke='none'/%3E%3Ccircle cx='9' cy='112' r='2' fill='%23c9a45c' stroke='none'/%3E%3C/g%3E%3C/svg%3E"); --c4:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120' fill='none' stroke='%23c9a45c' stroke-width='1.4' stroke-linecap='round' stroke-opacity='.8'%3E%3Cg transform='translate%28120 120%29 scale%28-1 -1%29'%3E%3Cpath d='M4 116V34Q4 4 34 4H116'/%3E%3Cpath d='M14 116V40Q14 14 40 14H116' stroke-opacity='.55'/%3E%3Cpath d='M30 30C48 30 58 40 56 54C54 66 40 68 34 60C28 52 36 44 44 48'/%3E%3Cpath d='M14 62C26 64 32 72 30 84M62 14C64 26 72 32 84 30' stroke-opacity='.7'/%3E%3Ccircle cx='30' cy='30' r='2.6' fill='%23c9a45c' stroke='none'/%3E%3Ccircle cx='112' cy='9' r='2' fill='%23c9a45c' stroke='none'/%3E%3Ccircle cx='9' cy='112' r='2' fill='%23c9a45c' stroke='none'/%3E%3C/g%3E%3C/svg%3E");
+        --corners:var(--c1),var(--c2),var(--c3),var(--c4);
+        width:100vw; max-width:100vw; margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw); position:relative; z-index:0; isolation:isolate;
+        font-family:var(--sans); font-size:1rem; line-height:1.7; color:var(--deep); background:var(--ivory); }
+  .nf *, .nf *::before, .nf *::after { box-sizing:border-box; }
+  .nf img { display:block; max-width:100%; }
+  .nf a { color:inherit; }
+  .nf h1, .nf h2, .nf h3 { font-family:var(--serif); font-weight:500; line-height:1.1; margin:0; }
+  .nf p { margin:0; }
+
+  /* sections: corner ornaments only */
+  .nf-s { position:relative; padding:5.5rem 1.5rem; background-repeat:no-repeat; background-size:150px 150px; background-position:left top,right top,left bottom,right bottom; }
+  .nf > .nf-s:nth-of-type(odd) { background-image:var(--corners); }
+  @media (max-width:700px) { .nf-s { background-size:84px 84px; padding:4.5rem 1.2rem; } }
+  .nf-s + .nf-s::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent,var(--gold),transparent); }
+  .nf-in { max-width:1120px; margin:0 auto; position:relative; }
+  .nf-cream { background-color:var(--ivory); color:var(--deep); }
+  .nf-green { background-color:var(--green); }
+  .nf-burg { background-color:var(--burg); }
+  .nf-dark, .nf-dark p, .nf-dark small, .nf-dark li, .nf-dark td, .nf-dark b, .nf-dark figure, .nf-dark span { color:var(--ivory); }
+  .nf .nf-dark h2, .nf .nf-dark .nf-hero-h { color:var(--antique) !important; }
+  .nf .nf-dark .nf-box h3 { color:var(--antique) !important; font-weight:700 !important; }
+  .nf-h2 { font-size:clamp(2rem,5vw,3.1rem); text-align:center; font-weight:600; }
+  .nf-btn { display:inline-block; padding:1.25rem 2.5rem; font:500 1rem/1 var(--sans); letter-spacing:.12em; text-decoration:none; border:1px solid var(--gold); background:var(--gold); color:var(--deep) !important; transition:background-color .25s,color .25s; }
+  .nf-btn span { color:inherit !important; }
+  .nf-btn:hover { background:var(--burg); color:var(--ivory) !important; }
+  .nf-btn--lg { padding:1.65rem 3.9rem; font-size:1.18rem; }
+  .nf-btn--o { background:transparent; color:var(--deep) !important; }
+  .nf-btn--o:hover { background:var(--gold); color:var(--deep) !important; }
+  .nf a:focus-visible, .nf summary:focus-visible, .nf input:focus-visible { outline:2px solid var(--gold); outline-offset:3px; }
+
+  /* sound familiar */
+  .nf-prob { padding:7.5rem 1.5rem; }
+  .nf-prob .nf-h2 { font-size:clamp(2.4rem,6vw,3.8rem); }
+  .nf-prob .nf-box { padding:2.5rem 1.6rem; }
+  .nf-prob .nf-box h3 { font-size:1.9rem; }
+  .nf-prob .nf-box p { font-size:1.28rem; line-height:1.6; }
+  .nf-prob .nf-quote { margin-top:6.5rem; font-size:clamp(2.1rem,4.8vw,3.1rem); }
+  @media (max-width:700px) { .nf-prob { padding:5.5rem 1.2rem; } .nf-prob .nf-quote { margin-top:4.5rem; } }
+
+  /* hero */
+  .nf > .nf-s.nf-hero { min-height:84vh; display:flex; align-items:center; background-image:var(--corners),linear-gradient(90deg,rgba(30,50,41,.92),rgba(30,50,41,.55) 55%,rgba(30,50,41,.15)),var(--hero); background-size:150px 150px,150px 150px,150px 150px,150px 150px,auto,cover; background-position:left top,right top,left bottom,right bottom,center,center; }
+  .nf-hero .nf-in { width:100%; }
+  .nf-hero-h { font-size:clamp(2.8rem,8vw,5.4rem); max-width:11em; font-weight:600; }
+  .nf-hero p { max-width:36rem; margin:1.4rem 0 2.2rem; font-size:clamp(1.3rem,2.8vw,1.7rem); line-height:1.6; }
+  .nf-hero small { display:block; margin-top:1.3rem; font-size:1.05rem; letter-spacing:.08em; }
+
+  /* grids + boxes with small corner ornaments */
+  .nf-grid { display:grid; gap:1.4rem; margin-top:2.8rem; grid-template-columns:1fr; }
+  @media (min-width:600px) { .nf-g4, .nf-g3 { grid-template-columns:repeat(2,1fr); } }
+  @media (min-width:900px) { .nf-g4 { grid-template-columns:repeat(4,1fr); } .nf-g3 { grid-template-columns:repeat(3,1fr); } }
+  .nf-box, .nf-rev, .nf-tx, .nf-offers { background-image:var(--corners); background-repeat:no-repeat; background-size:46px 46px; background-position:left top,right top,left bottom,right bottom; }
+  .nf-box { padding:2rem 1.5rem; border:1px solid rgba(201,164,92,.55); text-align:center; }
+  .nf-box h3 { font-size:1.5rem; margin:.6rem 0 .4rem; }
+  .nf-glyph { font-size:1.6rem; color:var(--gold) !important; }
+  .nf-quote { text-align:center; margin-top:4rem; font:italic 500 1.8rem/1.3 var(--serif); }
+  .nf-num { width:2.6rem; height:2.6rem; margin:0 auto; display:grid; place-items:center; border:1px solid var(--gold); border-radius:50%; font:600 1.2rem var(--serif); color:var(--gold) !important; }
+
+  /* material rows: photo with text in front, alternating */
+  .nf-row { display:grid; grid-template-columns:repeat(12,1fr); align-items:center; margin-top:3.5rem; }
+  .nf-ph { grid-column:1/8; grid-row:1; display:block; aspect-ratio:5/4; overflow:hidden; border:1px solid var(--gold); }
+  .nf-ph img { width:100%; height:100%; object-fit:cover; transition:transform .6s; }
+  .nf-ph:hover img { transform:scale(1.04); }
+  .nf-tx { grid-column:6/13; grid-row:1; z-index:2; padding:1.3rem 1.9rem 1.5rem; background-color:var(--green); border:1px solid var(--gold); box-shadow:0 18px 40px rgba(30,50,41,.35); }
+  .nf-row--rev .nf-ph { grid-column:6/13; }
+  .nf-row--rev .nf-tx { grid-column:1/8; }
+  .nf-tx h3 { font-size:clamp(1.9rem,3.6vw,2.5rem); font-weight:700; color:var(--antique) !important; margin-bottom:.4rem; }
+  .nf-tx p { margin-bottom:.1rem; font-size:1.25rem; line-height:1.45; }
+  .nf-tx .nf-btn { margin-top:.9rem; padding:1.1rem 2.2rem; }
+  .nf-tx b { color:var(--antique) !important; font-weight:600; }
+  @media (max-width:760px) { .nf-ph, .nf-row--rev .nf-ph { grid-column:1/-1; } .nf-tx, .nf-row--rev .nf-tx { grid-column:1/-1; grid-row:2; margin:-3rem 1rem 0; padding:1.3rem 1.3rem 1.5rem; } }
+
+  /* fabric collages: name behind, product photos in front */
+  .nf-shelf { display:block; margin-top:6rem; scroll-margin-top:90px; }
+  .nf-big { display:flex; align-items:center; gap:1.4rem; margin-bottom:2rem; font:italic 700 clamp(3.2rem,11vw,7rem)/1 var(--serif); }
+  .nf-big::before, .nf-big::after { content:''; flex:1; height:1px; background:linear-gradient(90deg,transparent,#b08a3e); }
+  .nf-big::after { transform:scaleX(-1); }
+  .nf-big span { color:#b08a3e !important; }
+  .nf-col { position:relative; display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
+  .nf-ci { position:relative; display:block; overflow:hidden; aspect-ratio:3/4; border:1px solid var(--gold); background:#e9e4d8; box-shadow:0 14px 30px rgba(30,50,41,.28); }
+  .nf-ci:nth-child(even) { margin-top:1.4rem; }
+  .nf-ci img { width:100%; height:100%; object-fit:cover; transition:transform .6s; }
+  .nf-ci:hover img { transform:scale(1.06); }
+  .nf-lab { position:absolute; left:0; right:0; bottom:0; padding:1.6rem .8rem .7rem; font:500 .95rem/1.3 var(--serif); color:var(--ivory); background:linear-gradient(transparent,rgba(30,50,41,.88)); }
+  .nf-more { text-align:center; margin-top:2.4rem; grid-column:1/-1; }
+  @media (min-width:700px) {
+    .nf-col { grid-template-columns:repeat(12,1fr); grid-auto-rows:clamp(30px,5.8vw,68px); gap:10px; }
+    .nf-ci { aspect-ratio:auto; }
+    .nf-ci:nth-child(even) { margin-top:0; }
+    .nf-ci:nth-child(1) { grid-column:1/5; grid-row:1/6; }
+    .nf-ci:nth-child(2) { grid-column:4/8; grid-row:3/9; z-index:2; }
+    .nf-ci:nth-child(3) { grid-column:7/11; grid-row:1/6; z-index:1; }
+    .nf-ci:nth-child(4) { grid-column:10/13; grid-row:5/10; z-index:3; }
+    .nf-more { margin-top:calc(clamp(30px,5.8vw,68px) * 1.2); }
+  }
+
+  /* reviews */
+  .nf-stars { color:#b08a3e !important; letter-spacing:.2em; }
+  .nf-rev { padding:2.2rem 1.6rem; border:1px solid rgba(201,164,92,.55); background-color:rgba(201,164,92,.12); text-align:center; margin:0; }
+  .nf-rev p { font:italic 500 1.3rem/1.5 var(--serif); margin:.8rem 0 1.1rem; }
+  .nf-rev b { display:block; font-weight:500; letter-spacing:.08em; }
+
+  /* offer */
+  .nf-offer { display:grid; gap:2.5rem; align-items:center; }
+  @media (min-width:900px) { .nf-offer { grid-template-columns:1fr 1fr; gap:4rem; } }
+  .nf-offer .nf-pic { aspect-ratio:4/5; max-width:380px; margin:0 auto; overflow:hidden; border-radius:999px 999px 0 0; border:4px solid var(--gold); }
+  .nf-offer .nf-pic img { width:100%; height:100%; object-fit:cover; }
+  .nf-offer h2 { font-size:clamp(2rem,5vw,3.1rem); font-weight:600; }
+  .nf-price { font:700 2.5rem/1.1 var(--serif); color:var(--burg); margin:1.2rem 0 .5rem; }
+  .nf-disc { font-size:1.3rem; }
+  .nf-code { display:inline-block; border:1px dashed var(--gold); padding:.1rem .8rem; letter-spacing:.1em; font-weight:500; }
+  .nf-offer ul { list-style:none; padding:0; margin:1.3rem 0; }
+  .nf-offer li { padding:.35rem 0 .35rem 1.8rem; position:relative; font-size:1.2rem; }
+  .nf-offer li::before { content:'✦'; position:absolute; left:0; color:var(--gold); }
+  .nf-offers { padding:1.6rem 1.6rem 1.3rem; margin:1.4rem 0 1.8rem; background-color:var(--green); border:1px solid var(--gold); }
+  .nf-offers h3 { font-size:1.6rem; font-weight:700; color:var(--antique) !important; margin-bottom:.4rem; }
+  .nf-offers p, .nf-offers span { color:var(--ivory) !important; font-size:1.2rem; padding:.2rem 0; }
+  .nf-offer .nf-btn { margin:0 .6rem .6rem 0; }
+
+  /* comparison */
+  .nf-tw { overflow-x:auto; margin-top:2.6rem; }
+  .nf table { width:100%; min-width:560px; border-collapse:collapse; border-top:2px solid var(--gold); }
+  .nf th, .nf td { padding:1.1rem 1.2rem; text-align:left; border-bottom:1px solid var(--gold); font-size:1.1rem; }
+  .nf th { font:700 1.5rem var(--serif); color:var(--antique) !important; border-bottom:2px solid var(--gold); }
+  .nf td:first-child { font-weight:500; color:var(--antique) !important; }
+  .nf td:first-child span { color:var(--antique) !important; }
+  .nf td.nf-yes::before { content:'✓ '; color:var(--gold); font-weight:700; }
+  .nf td.nf-no::before { content:'— '; color:var(--gold); }
+
+  /* care */
+  .nf-care { padding:7.5rem 1.5rem; }
+  .nf-care .nf-h2 { font-size:clamp(2.4rem,6vw,3.8rem); }
+  .nf-intro { display:block; width:100%; max-width:48rem; margin:1.2rem auto 0 !important; text-align:center !important; font-size:1.5rem; line-height:1.6; text-wrap:balance; }
+  .nf-care .nf-grid { margin-top:3.4rem; }
+  @media (max-width:700px) { .nf-care { padding:5.5rem 1.2rem; } }
+  .nf-care .nf-box { text-align:left; padding:2.4rem 1.7rem; }
+  .nf-care .nf-box h3 { color:var(--green); font-weight:700; font-size:2.15rem; margin:0; }
+  .nf-care ul { list-style:none; padding:0; margin:.7rem 0 0; }
+  .nf-care li { position:relative; padding:.45rem 0 .45rem 1.7rem; font-size:1.32rem; line-height:1.55; }
+  .nf-care li::before { content:'✦'; position:absolute; left:0; color:#b08a3e; }
+  .nf-care-more { text-align:center; margin-top:2.8rem; }
+
+  /* size chart */
+  .nf-linen { background-color:#EAE3D5; color:var(--deep); }
+  .nf-linen .nf-tab { color:var(--deep); }
+  .nf-linen .nf-tab.active { background:var(--gold); color:var(--deep); }
+  .nf-linen th { color:var(--green) !important; }
+  .nf-linen td:first-child { color:var(--green) !important; }
+  .nf-linen .nf-alpha-h, .nf-linen .nf-alpha b { color:var(--green) !important; }
+  .nf-sz-sub { text-align:center; margin-top:.8rem; font-size:1.45rem; }
+  .nf-tabs { display:flex; flex-wrap:wrap; max-width:640px; margin:2rem auto 0; border:1px solid var(--gold); }
+  .nf-tab { flex:1 1 25%; padding:1.2rem .6rem; background:transparent; border:0; border-right:1px solid var(--gold); color:var(--ivory); font:500 1.05rem var(--sans); letter-spacing:.12em; cursor:pointer; transition:background-color .25s,color .25s; }
+  .nf-tab:last-child { border-right:0; }
+  .nf-tab:hover { background:rgba(201,164,92,.25); }
+  .nf-tab.active { background:var(--gold); color:var(--deep); }
+  .nf-tab span { color:inherit !important; }
+  .nf-sz-panel { display:none; max-width:760px; margin:0 auto; }
+  .nf-sz-panel.active { display:block; }
+  .nf-sz table { min-width:0; }
+  .nf-sz .nf-tw { margin-top:1.6rem; }
+  .nf-alpha-h { text-align:center; margin-top:3.2rem; font:700 1.9rem var(--serif); color:var(--antique) !important; }
+  .nf-alpha { display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; max-width:760px; margin:1.4rem auto 0; }
+  .nf-alpha div { padding:1.3rem .6rem; text-align:center; border:1px solid rgba(201,164,92,.6); }
+  .nf-alpha b { display:block; font:700 2rem var(--serif); color:var(--antique) !important; }
+  .nf-sz-more { text-align:center; margin-top:2.8rem; }
+  .nf-sz-more p { font-size:1.2rem; margin-bottom:1.3rem; }
+  @media (max-width:600px) { .nf-alpha { grid-template-columns:repeat(2,1fr); } .nf-tab { flex:1 1 50%; border-bottom:1px solid var(--gold); } }
+
+  /* faq */
+  .nf-faq { max-width:50rem; margin:2.6rem auto 0; }
+  .nf-faq details { border-bottom:1px solid var(--gold); padding:1.2rem 0; }
+  .nf-faq summary { cursor:pointer; list-style:none; display:flex; justify-content:space-between; gap:1rem; font:600 1.7rem/1.3 var(--serif); }
+  .nf-faq summary::-webkit-details-marker { display:none; }
+  .nf-faq summary::after { content:'+'; color:var(--gold); font-size:1.8rem; line-height:1; }
+  .nf-faq details[open] summary::after { content:'−'; }
+  .nf-faq details p { margin-top:.8rem; font-size:1.2rem; line-height:1.7; }
+  .nf-faq a { color:var(--burg); font-weight:500; }
+
+  /* final */
+  .nf-final { text-align:center; padding:7rem 1.5rem; }
+  .nf-final h2 { font-size:clamp(2.4rem,6vw,4rem); font-weight:600; }
+  .nf-lead { margin:1.2rem 0 4.8rem; font-size:1.75rem; line-height:1.5; }
+  .nf-news { max-width:34rem; margin:4.5rem auto 0; padding-top:2.8rem; border-top:1px solid var(--gold); }
+  .nf-news h3 { font-size:2rem; font-weight:700; color:var(--antique) !important; }
+  .nf-news p { margin:.6rem 0 1.3rem; font-size:1.15rem; }
+  .nf-form { display:flex; border:1px solid var(--gold); background:rgba(30,50,41,.75); }
+  .nf-form input { flex:1; min-width:0; padding:1.2rem 1.2rem; border:0; background:transparent; color:var(--ivory); font:400 1.15rem var(--sans); }
+  .nf-form input::placeholder { color:#F8F3EA; opacity:.7; }
+  .nf-form button { padding:0 1.8rem; border:0; border-left:1px solid var(--gold); background:transparent; color:var(--ivory); cursor:pointer; font:500 1.05rem var(--sans); letter-spacing:.1em; }
+  .nf-form button:hover { background:var(--gold); color:var(--deep); }
+  @media (prefers-reduced-motion:reduce) { .nf *, html { scroll-behavior:auto !important; transition:none !important; } }
+</style>
+
+<div class="nf">
+
+  <!-- 1. HERO -->
+  <section class="nf-s nf-dark nf-hero" style="--hero:url('{{ hero_img | append: '&width=1800' }}')">
+    <div class="nf-in">
+      <h1 class="nf-hero-h"><span class="text-en">Materials that are meant to last.</span><span class="text-fr">Des matières faites pour durer.</span><span class="text-ru">Материалы, созданные служить долго.</span></h1>
+      <p><span class="text-en">Cashmere, wool, leather and silk from houses we trust, hand-selected and checked for quality.</span><span class="text-fr">Cachemire, laine, cuir et soie issus de maisons de confiance, sélectionnés à la main et contrôlés pour leur qualité.</span><span class="text-ru">Кашемир, шерсть, кожа и шёлк от домов, которым мы доверяем: отобраны вручную и проверены на качество.</span></p>
+      <a class="nf-btn" href="#materials"><span class="text-en">Explore the Materials</span><span class="text-fr">Découvrir les matières</span><span class="text-ru">Изучить материалы</span></a>
+      <small><span class="text-en">Free delivery over 415 USD · Natural fibres only</span><span class="text-fr">Livraison offerte dès 415 USD · Fibres naturelles uniquement</span><span class="text-ru">Бесплатная доставка от 415 USD · Только натуральные волокна</span></small>
+    </div>
+  </section>
+
+  <!-- 2. PROBLEM -->
+  <section class="nf-s nf-cream nf-prob">
+    <div class="nf-in">
+      <h2 class="nf-h2"><span class="text-en">Sound familiar?</span><span class="text-fr">Cela vous dit quelque chose ?</span><span class="text-ru">Знакомо?</span></h2>
+      <div class="nf-grid nf-g4">
+        {%- for p in problems -%}{%- assign f = p | split: '|' -%}
+          <div class="nf-box"><span class="nf-glyph">✕</span><h3><span class="text-en">{{ f[0] }}</span><span class="text-fr">{{ f[2] }}</span><span class="text-ru">{{ f[4] }}</span></h3><p><span class="text-en">{{ f[1] }}</span><span class="text-fr">{{ f[3] }}</span><span class="text-ru">{{ f[5] }}</span></p></div>
+        {%- endfor -%}
+      </div>
+      <p class="nf-quote"><span class="text-en">There is a better way to buy.</span><span class="text-fr">Il existe une meilleure façon d’acheter.</span><span class="text-ru">Есть способ покупать лучше.</span></p>
+    </div>
+  </section>
+
+  <!-- 3. BENEFITS -->
+  <section class="nf-s nf-green nf-dark">
+    <div class="nf-in">
+      <h2 class="nf-h2"><span class="text-en">Why natural materials</span><span class="text-fr">Pourquoi les matières naturelles</span><span class="text-ru">Почему натуральные материалы</span></h2>
+      <div class="nf-grid nf-g3">
+        {%- for b in benefits -%}{%- assign f = b | split: '|' -%}
+          <div class="nf-box"><span class="nf-glyph">{{ glyphs[forloop.index0] }}</span><h3><span class="text-en">{{ f[0] }}</span><span class="text-fr">{{ f[2] }}</span><span class="text-ru">{{ f[4] }}</span></h3><p><span class="text-en">{{ f[1] }}</span><span class="text-fr">{{ f[3] }}</span><span class="text-ru">{{ f[5] }}</span></p></div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. FOUR MATERIALS -->
+  <section class="nf-s nf-cream" id="materials" style="scroll-margin-top:70px">
+    <div class="nf-in">
+      <h2 class="nf-h2"><span class="text-en">Four materials. Endless ways to wear them.</span><span class="text-fr">Quatre matières. Mille façons de les porter.</span><span class="text-ru">Четыре материала. Бесконечно способов их носить.</span></h2>
+
+      {%- for m in meta -%}{%- assign f = m | split: '|' -%}
+        {%- assign first = allp[forloop.index0] | split: '~' | first | split: '|' -%}
+        <div class="nf-row{% if forloop.index0 == 1 or forloop.index0 == 3 %} nf-row--rev{% endif %}">
+          <a class="nf-ph" href="{{ root }}collections/{{ f[3] }}"><img src="{{ first[2] | append: '&width=1000' }}" alt="{{ f[0] }}" loading="lazy" width="1000" height="800"></a>
+          <div class="nf-tx nf-dark">
+            <h3><span class="text-en">{{ f[0] }}</span><span class="text-fr">{{ f[1] }}</span><span class="text-ru">{{ f[2] }}</span></h3>
+            <p><span class="text-en">{{ f[4] }}</span><span class="text-fr">{{ f[5] }}</span><span class="text-ru">{{ f[6] }}</span></p>
+            <p><b><span class="text-en">Best for:</span><span class="text-fr">Idéal pour :</span><span class="text-ru">Подходит для:</span></b> <span class="text-en">{{ f[7] }}</span><span class="text-fr">{{ f[8] }}</span><span class="text-ru">{{ f[9] }}</span></p>
+            <p><b><span class="text-en">Care:</span><span class="text-fr">Entretien :</span><span class="text-ru">Уход:</span></b> <span class="text-en">{{ f[10] }}</span><span class="text-fr">{{ f[11] }}</span><span class="text-ru">{{ f[12] }}</span></p>
+            <a class="nf-btn" href="{{ root }}collections/{{ f[3] }}"><span class="text-en">{{ f[13] }}</span><span class="text-fr">{{ f[14] }}</span><span class="text-ru">{{ f[15] }}</span></a>
+          </div>
+        </div>
+      {%- endfor -%}
+
+      {%- assign order = '1,2,3,0' | split: ',' -%}
+      {%- for oi in order -%}{%- assign oi_n = oi | plus: 0 -%}{%- assign f = meta[oi_n] | split: '|' -%}{%- assign coll = root | append: 'collections/' | append: f[3] -%}
+        <div class="nf-shelf" id="{{ f[0] | downcase }}">
+          <h3 class="nf-big"><span class="text-en">{{ f[0] }}</span><span class="text-fr">{{ f[1] }}</span><span class="text-ru">{{ f[2] }}</span></h3>
+          <div class="nf-col">
+            {%- assign items = allp[oi_n] | split: '~' -%}
+            {%- for it in items -%}{%- assign p = it | split: '|' -%}
+              {%- assign purl = coll -%}
+              {%- if p[1] != blank -%}{%- assign purl = root | append: 'products/' | append: p[1] -%}{%- endif -%}
+              <a class="nf-ci" href="{{ purl }}"><img src="{{ p[2] | append: '&width=700' }}" alt="{{ p[0] | escape }}" loading="lazy" width="700" height="933"><span class="nf-lab">{{ p[0] }}</span></a>
+            {%- endfor -%}
+            <div class="nf-more"><a class="nf-btn nf-btn--o" href="{{ coll }}"><span class="text-en">{{ f[13] }}</span><span class="text-fr">{{ f[14] }}</span><span class="text-ru">{{ f[15] }}</span></a></div>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </section>
+
+  <!-- 4b. HOW WE CURATE -->
+  <section class="nf-s nf-green nf-dark">
+    <div class="nf-in">
+      <h2 class="nf-h2"><span class="text-en">How every piece reaches you</span><span class="text-fr">Comment chaque pièce arrive jusqu’à vous</span><span class="text-ru">Как каждая вещь попадает к вам</span></h2>
+      <div class="nf-grid nf-g4">
+        {%- for s in steps -%}{%- assign f = s | split: '|' -%}
+          <div class="nf-box"><span class="nf-num">{{ forloop.index }}</span><h3><span class="text-en">{{ f[0] }}</span><span class="text-fr">{{ f[2] }}</span><span class="text-ru">{{ f[4] }}</span></h3><p><span class="text-en">{{ f[1] }}</span><span class="text-fr">{{ f[3] }}</span><span class="text-ru">{{ f[5] }}</span></p></div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  <!-- 5b. CARE -->
+  <section class="nf-s nf-cream nf-care">
+    <div class="nf-in">
+      <h2 class="nf-h2"><span class="text-en">How to care for your pieces</span><span class="text-fr">Comment prendre soin de vos pièces</span><span class="text-ru">Как ухаживать за вашими вещами</span></h2>
+      <p class="nf-intro"><span class="text-en">A few simple habits keep natural fibres beautiful for years. Here is the essential care for each material.</span><span class="text-fr">Quelques gestes simples gardent les fibres naturelles belles pendant des années. Voici l’essentiel pour chaque matière.</span><span class="text-ru">Несколько простых привычек сохраняют натуральные волокна красивыми годами. Вот главное об уходе за каждым материалом.</span></p>
+      <div class="nf-grid nf-g4">
+        {%- for c in care -%}{%- assign tp = c | split: '|' -%}{%- assign mf = meta[forloop.index0] | split: '|' -%}
+          <div class="nf-box"><h3><span class="text-en">{{ mf[0] }}</span><span class="text-fr">{{ mf[1] }}</span><span class="text-ru">{{ mf[2] }}</span></h3>
             <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#portfolio">Portfolio</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#contact">Contact</a></li>
+              <li><span class="text-en">{{ tp[0] }}</span><span class="text-fr">{{ tp[1] }}</span><span class="text-ru">{{ tp[2] }}</span></li>
+              <li><span class="text-en">{{ tp[3] }}</span><span class="text-fr">{{ tp[4] }}</span><span class="text-ru">{{ tp[5] }}</span></li>
+              <li><span class="text-en">{{ tp[6] }}</span><span class="text-fr">{{ tp[7] }}</span><span class="text-ru">{{ tp[8] }}</span></li>
             </ul>
+          </div>
+        {%- endfor -%}
+      </div>
+      <div class="nf-care-more"><a class="nf-btn" href="{{ root }}blogs/news/the-complete-guide-to-caring-for-fabrics-1"><span class="text-en">Read the full care guide</span><span class="text-fr">Lire le guide d’entretien complet</span><span class="text-ru">Читать полное руководство по уходу</span></a></div>
+    </div>
+  </section>
+
+  <!-- 7. COMPARISON -->
+  <section class="nf-s nf-green nf-dark">
+    <div class="nf-in">
+      <h2 class="nf-h2"><span class="text-en">Natural materials vs. typical fast fashion</span><span class="text-fr">Matières naturelles vs fast fashion classique</span><span class="text-ru">Натуральные материалы и типичный масс-маркет</span></h2>
+      <div class="nf-tw">
+        <table>
+          <thead><tr><th></th><th>ÉTOFFE</th><th><span class="text-en">Typical fast fashion</span><span class="text-fr">Fast fashion classique</span><span class="text-ru">Масс-маркет</span></th></tr></thead>
+          <tbody>
+            {%- for c in compare -%}{%- assign f = c | split: '|' -%}
+              <tr><td><span class="text-en">{{ f[0] }}</span><span class="text-fr">{{ f[3] }}</span><span class="text-ru">{{ f[6] }}</span></td><td class="nf-yes"><span class="text-en">{{ f[1] }}</span><span class="text-fr">{{ f[4] }}</span><span class="text-ru">{{ f[7] }}</span></td><td class="nf-no"><span class="text-en">{{ f[2] }}</span><span class="text-fr">{{ f[5] }}</span><span class="text-ru">{{ f[8] }}</span></td></tr>
+            {%- endfor -%}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. OFFER -->
+  <section class="nf-s nf-cream">
+    <div class="nf-in nf-offer">
+      <div class="nf-pic"><img src="{{ offer_img | append: '&width=800' }}" alt="Natural leather, wool and cashmere pieces" loading="lazy" width="800" height="1000"></div>
+      <div>
+        <h2><span class="text-en">Begin with something made to last.</span><span class="text-fr">Commencez par une pièce faite pour durer.</span><span class="text-ru">Начните с вещи, созданной служить долго.</span></h2>
+        <p class="nf-price"><span class="text-en">Pieces from USD 300</span><span class="text-fr">Pièces à partir de 300 USD</span><span class="text-ru">Вещи от 300 USD</span></p>
+        <p class="nf-disc"><span class="text-en">15% off your first order with code</span><span class="text-fr">15 % de réduction sur votre première commande avec le code</span><span class="text-ru">Скидка 15% на первый заказ с кодом</span> <span class="nf-code">FABRICS15</span></p>
+        <div class="nf-offers nf-dark">
+          <h3><span class="text-en">More offers</span><span class="text-fr">Autres offres</span><span class="text-ru">Другие предложения</span></h3>
+          <p>✦ <span class="text-en">Get a high quality piece for free with orders over $500</span><span class="text-fr">Recevez une pièce de grande qualité offerte pour toute commande de plus de 500 $</span><span class="text-ru">Получите качественную вещь в подарок при заказе от $500</span></p>
+          <p>✦ <span class="text-en">Buy 2 and get a discount!</span><span class="text-fr">Achetez-en 2 et bénéficiez d’une réduction !</span><span class="text-ru">Купите 2 и получите скидку!</span></p>
         </div>
-    </nav>
+        <ul>
+          <li><span class="text-en">Quality-checked natural-fibre pieces</span><span class="text-fr">Pièces en fibres naturelles, contrôlées</span><span class="text-ru">Вещи из натуральных волокон, прошедшие проверку качества</span></li>
+          <li><span class="text-en">Fibre composition listed on every product</span><span class="text-fr">Composition indiquée sur chaque produit</span><span class="text-ru">Состав указан для каждого товара</span></li>
+          <li><span class="text-en">Careful, gift-ready packaging</span><span class="text-fr">Emballage soigné, prêt à offrir</span><span class="text-ru">Аккуратная подарочная упаковка</span></li>
+          <li><span class="text-en">Free delivery over 415 USD</span><span class="text-fr">Livraison offerte dès 415 USD</span><span class="text-ru">Бесплатная доставка от 415 USD</span></li>
+          <li><span class="text-en">Returns: see our</span><span class="text-fr">Retours : consultez notre</span><span class="text-ru">Возврат: см.</span> <a href="{{ root }}policies/refund-policy"><span class="text-en">returns policy</span><span class="text-fr">politique de retour</span><span class="text-ru">условия возврата</span></a></li>
+        </ul>
+        <a class="nf-btn" href="{{ root }}collections/all"><span class="text-en">Shop the Collection</span><span class="text-fr">Voir la collection</span><span class="text-ru">Смотреть коллекцию</span></a>
+        <a class="nf-btn nf-btn--o" href="{{ root }}pages/size-chart"><span class="text-en">Size chart</span><span class="text-fr">Guide des tailles</span><span class="text-ru">Таблица размеров</span></a>
+      </div>
+    </div>
+  </section>
 
-    <!-- ============================================
-         HERO SECTION — Split layout with large photo
-         ============================================ -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <span class="eyebrow">Real Estate Analyst</span>
-                <h1>Lusvard<br><span class="accent">Arakelyan</span></h1>
-                <p class="role">Real Estate Analyst | Financial Modeling Expert</p>
-                <p class="tagline">Real Estate Underwriting · Financial Analysis · Offering Memoranda · Pitch Decks</p>
-                <div class="hero-buttons">
-                    <a href="#contact" class="btn btn-primary">Schedule a Consultation</a>
-                    <a href="#portfolio" class="btn btn-outline">View Work</a>
-                </div>
-            </div>
-            <div class="hero-photo">
-                <div class="hero-photo-frame">
-                    <img src="5444cfaa-a8fe-4929-b79b-fea03690e0d2.jpg" alt="Lusvard Arakelyan">
-                </div>
-                <div class="hero-photo-badge">
-                    <div class="number">5+</div>
-                    <div class="label">Years Experience</div>
-                </div>
-            </div>
+  <!-- 5. REVIEWS -->
+  <section class="nf-s nf-cream">
+    <div class="nf-in">
+      <h2 class="nf-h2"><span class="text-en">Kind words from our clients</span><span class="text-fr">Les mots de nos clients</span><span class="text-ru">Тёплые слова наших клиентов</span></h2>
+      <div class="nf-grid nf-g3">
+        {%- for r in reviews -%}{%- assign f = r | split: '|' -%}
+          <figure class="nf-rev"><span class="nf-stars">★★★★★</span><p>“<span class="text-en">{{ f[0] }}</span><span class="text-fr">{{ f[1] }}</span><span class="text-ru">{{ f[2] }}</span>”</p><b>{{ f[3] }}</b><small><span class="text-en">{{ f[4] }}</span><span class="text-fr">{{ f[5] }}</span><span class="text-ru">{{ f[6] }}</span></small></figure>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  <!-- 7b. SIZE CHART -->
+  <section class="nf-s nf-linen nf-sz" id="size-chart">
+    <div class="nf-in">
+      <h2 class="nf-h2"><span class="text-en">Find your size</span><span class="text-fr">Trouvez votre taille</span><span class="text-ru">Подберите свой размер</span></h2>
+      <p class="nf-sz-sub"><span class="text-en">Select your region below.</span><span class="text-fr">Choisissez votre région ci-dessous.</span><span class="text-ru">Выберите свой регион ниже.</span></p>
+      <div class="nf-tabs">
+        {%- for r in regs -%}
+          <button type="button" class="nf-tab{% if forloop.first %} active{% endif %}" data-tab="{{ r }}"><span class="text-en">{{ r | upcase }} Sizing</span><span class="text-fr">Tailles {{ r | upcase }}</span><span class="text-ru">Размеры {{ r | upcase }}</span></button>
+        {%- endfor -%}
+      </div>
+      {%- for r in regs -%}
+        {%- if r == 'us' -%}{%- assign rows = size_us -%}{%- assign unit = 'in' -%}
+        {%- elsif r == 'uk' -%}{%- assign rows = size_uk -%}{%- assign unit = 'in' -%}
+        {%- else -%}{%- assign rows = size_eu -%}{%- assign unit = 'cm' -%}{%- endif -%}
+        <div class="nf-sz-panel{% if forloop.first %} active{% endif %}" id="nf-sz-{{ r }}">
+          <div class="nf-tw"><table>
+            <thead><tr><th>{{ r | upcase }}</th>
+              <th><span class="text-en">Bust ({{ unit }})</span><span class="text-fr">Poitrine ({% if unit == 'cm' %}cm{% else %}po{% endif %})</span><span class="text-ru">Грудь ({% if unit == 'cm' %}см{% else %}дюйм{% endif %})</span></th>
+              <th><span class="text-en">Waist ({{ unit }})</span><span class="text-fr">Taille ({% if unit == 'cm' %}cm{% else %}po{% endif %})</span><span class="text-ru">Талия ({% if unit == 'cm' %}см{% else %}дюйм{% endif %})</span></th>
+              <th><span class="text-en">Hip ({{ unit }})</span><span class="text-fr">Hanches ({% if unit == 'cm' %}cm{% else %}po{% endif %})</span><span class="text-ru">Бёдра ({% if unit == 'cm' %}см{% else %}дюйм{% endif %})</span></th></tr></thead>
+            <tbody>
+              {%- assign rws = rows | split: '~' -%}
+              {%- for rw in rws -%}{%- assign c = rw | split: '|' -%}
+                <tr><td>{{ c[0] }}</td><td>{{ c[1] }}</td><td>{{ c[2] }}</td><td>{{ c[3] }}</td></tr>
+              {%- endfor -%}
+            </tbody>
+          </table></div>
         </div>
-    </section>
+      {%- endfor -%}
+      <h3 class="nf-alpha-h"><span class="text-en">Alpha conversion</span><span class="text-fr">Correspondance des tailles</span><span class="text-ru">Соответствие буквенных размеров</span></h3>
+      <div class="nf-alpha">
+        <div><b>XS</b><span>EU 34 / US 2</span></div>
+        <div><b>S</b><span>EU 36–38 / US 4–6</span></div>
+        <div><b>M</b><span>EU 40–42 / US 8–10</span></div>
+        <div><b>L</b><span>EU 44–46 / US 12–14</span></div>
+      </div>
+      <div class="nf-sz-more">
+        <p><span class="text-en">Measuring tips and material-specific fit notes are in our full size guide.</span><span class="text-fr">Conseils de mesure et notes de coupe par matière : consultez notre guide complet.</span><span class="text-ru">Советы по замерам и особенности посадки по материалам — в полной таблице размеров.</span></p>
+        <a class="nf-btn" href="{{ root }}pages/size-chart"><span class="text-en">View the full size guide</span><span class="text-fr">Voir le guide des tailles complet</span><span class="text-ru">Открыть полную таблицу размеров</span></a>
+      </div>
+    </div>
+  </section>
 
-    <!-- ============================================
-         ABOUT SECTION
-         ============================================ -->
-    <section class="about" id="about">
-        <div class="section-container">
-            <div class="section-header">
-                <span class="section-eyebrow">About Me</span>
-                <h2 class="section-title">Turning complex financial data into clear decisions.</h2>
-            </div>
+  <!-- 8. FAQ -->
+  <section class="nf-s nf-cream">
+    <div class="nf-in">
+      <h2 class="nf-h2"><span class="text-en">Questions, answered</span><span class="text-fr">Vos questions, nos réponses</span><span class="text-ru">Вопросы и ответы</span></h2>
+      <div class="nf-faq">
+        {%- for q in faq -%}{%- assign f = q | split: '|' -%}
+          <details{% if forloop.first %} open{% endif %}><summary><span><span class="text-en">{{ f[0] }}</span><span class="text-fr">{{ f[2] }}</span><span class="text-ru">{{ f[4] }}</span></span></summary><p><span class="text-en">{{ f[1] }}</span><span class="text-fr">{{ f[3] }}</span><span class="text-ru">{{ f[5] }}</span></p></details>
+        {%- endfor -%}
+        <details><summary><span><span class="text-en">Can I return an item?</span><span class="text-fr">Puis-je retourner un article ?</span><span class="text-ru">Можно ли вернуть товар?</span></span></summary><p><span class="text-en">Yes. Please see our <a href="{{ root }}policies/refund-policy">returns policy</a> for the full details.</span><span class="text-fr">Oui. Consultez notre <a href="{{ root }}policies/refund-policy">politique de retour</a> pour tous les détails.</span><span class="text-ru">Да. Подробности есть в наших <a href="{{ root }}policies/refund-policy">условиях возврата</a>.</span></p></details>
+        <details><summary><span><span class="text-en">Which size should I choose?</span><span class="text-fr">Quelle taille choisir ?</span><span class="text-ru">Какой размер выбрать?</span></span></summary><p><span class="text-en">Every house cuts a little differently. Check our <a href="{{ root }}pages/size-chart">size chart</a> before ordering.</span><span class="text-fr">Chaque maison taille un peu différemment. Consultez notre <a href="{{ root }}pages/size-chart">guide des tailles</a> avant de commander.</span><span class="text-ru">Каждый дом кроит немного по-своему. Перед заказом посмотрите нашу <a href="{{ root }}pages/size-chart">таблицу размеров</a>.</span></p></details>
+      </div>
+    </div>
+  </section>
 
-            <div class="about-grid">
-                <div class="about-visual">
-                    <img src="IMG_20220915_1704295.jpg" alt="Lusvard Arakelyan">
-                </div>
-                <div class="about-text">
-                    <h3>Financial Analyst with 5+ years across fintech, CRE, and global markets.</h3>
-                    <p>
-                        I am Lusvard — a financial analyst experienced in real estate deal structuring (over <strong>$3B in transactions</strong>), 
-                        financial data analysis, and market performance monitoring. I build and optimize financial models, forecasts, 
-                        budgets, and automated reports using advanced Excel, Power BI, SQL, and Python/R.
-                    </p>
-                    <p>
-                        An emerging specialist in financial modeling and real estate underwriting, I develop advanced Excel models 
-                        for commercial origination and business valuation — enhancing revenue share models, adjustable thresholds, 
-                        multi-year projections, DCF analysis, and investor-grade deliverables for M&A and fundraising.
-                    </p>
-                    <p>
-                        Adept at collaborating remotely with multicultural teams across multiple time zones.
-                    </p>
+  <!-- 9. FINAL CTA + NEWSLETTER -->
+  <section class="nf-s nf-green nf-dark nf-final">
+    <div class="nf-in">
+      <h2><span class="text-en">Choose once. Wear for years.</span><span class="text-fr">Choisissez une fois. Portez pendant des années.</span><span class="text-ru">Выберите один раз. Носите годами.</span></h2>
+      <p class="nf-lead"><span class="text-en">Natural materials, trusted houses, pieces that last.</span><span class="text-fr">Des matières naturelles, des maisons de confiance, des pièces qui durent.</span><span class="text-ru">Натуральные материалы, проверенные дома, вещи, которые служат долго.</span></p>
+      <a class="nf-btn nf-btn--lg" href="{{ root }}collections/fabrics"><span class="text-en">Explore the Fabrics</span><span class="text-fr">Découvrir les tissus</span><span class="text-ru">Изучить ткани</span></a>
+      <p style="margin-top:1.8rem;font-size:1.15rem"><span class="text-en">15% off your first order with code</span><span class="text-fr">15 % de réduction sur votre première commande avec le code</span><span class="text-ru">Скидка 15% на первый заказ с кодом</span> <span class="nf-code">FABRICS15</span></p>
 
-                    <div class="credentials">
-                        <div class="credential-item">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <rect x="2" y="7" width="20" height="14" rx="2"/>
-                                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
-                            </svg>
-                            <div class="text">
-                                <strong>5+ Years</strong>
-                                <span>Professional Experience</span>
-                            </div>
-                        </div>
-                        <div class="credential-item">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
-                                <path d="M6 12v5c3 3 9 3 12 0v-5"/>
-                            </svg>
-                            <div class="text">
-                                <strong>M.S. Economics</strong>
-                                <span>American University of Armenia</span>
-                            </div>
-                        </div>
-                        <div class="credential-item">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <circle cx="12" cy="8" r="6"/>
-                                <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/>
-                            </svg>
-                            <div class="text">
-                                <strong>CFI Certified</strong>
-                                <span>Corporate Finance Institute</span>
-                            </div>
-                        </div>
-                        <div class="credential-item">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                                <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/>
-                            </svg>
-                            <div class="text">
-                                <strong>10+ Certifications</strong>
-                                <span>Finance & Data Analysis</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+      <div class="nf-news">
+        <h3><span class="text-en">Join the Collectors’ Circle</span><span class="text-fr">Rejoignez le Cercle des collectionneurs</span><span class="text-ru">Присоединяйтесь к Кругу коллекционеров</span></h3>
+        <p><span class="text-en">Early access to new arrivals and 15% off your first order.</span><span class="text-fr">Accès anticipé aux nouveautés et 15 % de réduction sur votre première commande.</span><span class="text-ru">Ранний доступ к новинкам и скидка 15% на первый заказ.</span></p>
+        {%- form 'customer', id: 'nf-news-form', class: 'nf-form' -%}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <input type="email" name="contact[email]" required autocomplete="email" data-ph-en="Your email" data-ph-fr="Votre e-mail" data-ph-ru="Ваш e-mail" placeholder="Your email" aria-label="Email">
+          <button type="submit"><span class="text-en">SUBSCRIBE</span><span class="text-fr">S’ABONNER</span><span class="text-ru">ПОДПИСАТЬСЯ</span></button>
+        {%- endform -%}
+      </div>
+    </div>
+  </section>
 
-    <!-- ============================================
-         SERVICES SECTION — Monotone SVG icons
-         ============================================ -->
-    <section class="services" id="services">
-        <div class="section-container">
-            <div class="section-header">
-                <span class="section-eyebrow">What I Do</span>
-                <h2 class="section-title">Services I can help you with</h2>
-                <p class="section-subtitle">End-to-end financial analysis and real estate underwriting — from raw data to investor-ready materials.</p>
-            </div>
+</div>
 
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                            <path d="M3 3v18h18"/>
-                            <path d="M7 14l4-4 4 4 5-5"/>
-                        </svg>
-                    </div>
-                    <h3>Financial Modeling & Forecasting</h3>
-                    <p>3-statement models, scenario and sensitivity analysis, multi-year projections, and forecasting tools in Excel and Google Sheets.</p>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                            <path d="M3 21h18"/>
-                            <path d="M5 21V7l7-4 7 4v14"/>
-                            <path d="M9 21v-6h6v6"/>
-                            <path d="M9 10h.01M15 10h.01"/>
-                        </svg>
-                    </div>
-                    <h3>Real Estate Underwriting & Pro Formas</h3>
-                    <p>Acquisition, development, and construction models for multifamily, commercial, and retail projects — equity and debt underwriting.</p>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                            <circle cx="12" cy="12" r="9"/>
-                            <path d="M12 7v10M9 10h4.5a1.5 1.5 0 0 1 0 3H9"/>
-                        </svg>
-                    </div>
-                    <h3>Business Valuation / DCF</h3>
-                    <p>Supporting investors, M&A transactions, fundraising, and internal strategic planning with DCF, LBO, and comps analysis.</p>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                            <rect x="3" y="4" width="18" height="16" rx="2"/>
-                            <path d="M3 10h18M8 4v16"/>
-                        </svg>
-                    </div>
-                    <h3>FP&A Consulting</h3>
-                    <p>Budgeting, variance and ratio analysis, cash flow forecasting, and dashboard automation for operational clarity.</p>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                            <path d="M14 2v6h6"/>
-                            <path d="M9 15l2 2 4-4"/>
-                        </svg>
-                    </div>
-                    <h3>Investor Materials</h3>
-                    <p>Pitch decks, teasers, and investment memoranda with clear visuals and financial insights — ready for capital raises.</p>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                            <rect x="3" y="12" width="4" height="9"/>
-                            <rect x="10" y="7" width="4" height="14"/>
-                            <rect x="17" y="3" width="4" height="18"/>
-                        </svg>
-                    </div>
-                    <h3>Data Analysis & Visualization</h3>
-                    <p>Power BI dashboards, Python statistical analysis, SQL queries, and automated reporting pipelines for deeper insight.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================
-         SKILLS SECTION — Dark section
-         ============================================ -->
-    <section class="skills">
-        <div class="section-container">
-            <div class="section-header">
-                <span class="section-eyebrow">Capabilities</span>
-                <h2 class="section-title">Skills & Tools</h2>
-                <p class="section-subtitle">A complete toolkit for financial analysis, underwriting, and data-driven decision making.</p>
-            </div>
-
-            <div class="skills-grid">
-                <div class="skills-list">
-                    <div class="skill-item">Financial Modeling</div>
-                    <div class="skill-item">Real Estate Underwriting</div>
-                    <div class="skill-item">Pro Forma Modeling</div>
-                    <div class="skill-item">Investment Analysis</div>
-                    <div class="skill-item">Financial Planning</div>
-                    <div class="skill-item">Forecasting & Scenario Analysis</div>
-                    <div class="skill-item">Ratio & Variance Analysis</div>
-                    <div class="skill-item">FP&A and Budgeting</div>
-                    <div class="skill-item">Pitch Decks, IMs, Teasers</div>
-                    <div class="skill-item">Data Cleaning & Visualization</div>
-                    <div class="skill-item">Business Valuation — DCF, LBO, Comps</div>
-                    <div class="skill-item">NOI, DSCR, LTV/LTC, IRR, NPV</div>
-                    <div class="skill-item">Market Research & CoStar</div>
-                    <div class="skill-item">Capital Budgeting</div>
-                    <div class="skill-item">Cash Flow Modeling</div>
-                    <div class="skill-item">WACC, CAPM, FCFF/FCFE</div>
-                </div>
-
-                <div class="tools-box">
-                    <h3>Software & Tools</h3>
-                    <div class="tools-list">
-                        <span class="tool-tag">Excel</span>
-                        <span class="tool-tag">Google Sheets</span>
-                        <span class="tool-tag">Power BI</span>
-                        <span class="tool-tag">Python</span>
-                        <span class="tool-tag">SQL</span>
-                        <span class="tool-tag">CoStar</span>
-                        <span class="tool-tag">Canva</span>
-                        <span class="tool-tag">PowerPoint</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================
-         PORTFOLIO SECTION — Using ALL provided images
-         ============================================ -->
-    <section class="portfolio" id="portfolio">
-        <div class="section-container">
-            <div class="section-header">
-                <span class="section-eyebrow">Portfolio</span>
-                <h2 class="section-title">Work Samples</h2>
-                <p class="section-subtitle">A selection of offering memoranda, pro formas, underwriting models, and investor materials.</p>
-            </div>
-
-            <!-- Category 1: Offering Memoranda (with featured video) -->
-            <div class="portfolio-category">
-                <div class="category-header">
-                    <h3>Offering Memoranda</h3>
-                    <span class="count">09 Samples + Video</span>
-                </div>
-
-                <!-- Featured Video: OM Walkthrough -->
-                <div class="featured-video">
-                    <video controls preload="metadata" poster="">
-                        <source src="Screen Recording - Oct 22, 2026, 84939 PM.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                    <div class="featured-video-caption">
-                        <div class="caption-text">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                                <polygon points="5 3 19 12 5 21 5 3"/>
-                            </svg>
-                            <div>
-                                <strong>Offering Memorandum — Walkthrough</strong>
-                                <span>Screen recording · Oct 22, 2026</span>
-                            </div>
-                        </div>
-                        <span class="caption-tag">Featured</span>
-                    </div>
-                </div>
-
-                <div class="portfolio-grid">
-                    <div class="portfolio-item">
-                        <img src="om1.png" alt="Offering Memorandum Cover">
-                        <div class="overlay"><span>OM — Cover</span></div>
-                    </div>
-                    <div class="portfolio-item">
-                        <img src="omcontent.png" alt="OM Content">
-                        <div class="overlay"><span>OM — Content</span></div>
-                    </div>
-                    <div class="portfolio-item">
-                        <img src="omhighlights.png" alt="OM Highlights">
-                        <div class="overlay"><span>OM — Highlights</span></div>
-                    </div>
-                    <div class="portfolio-item">
-                        <img src="omtimeline.png" alt="OM Timeline">
-                        <div class="overlay"><span>OM — Timeline</span></div>
-                    </div>
-                    <div class="portfolio-item">
-                        <img src="resize-17903349311975589524Screenshot20260925143347.png" alt="OM Sample 1">
-                        <div class="overlay"><span>OM — Detail</span></div>
-                    </div>
-                    <div class="portfolio-item">
-                        <img src="resize-1790334945337256078Screenshot20260925143422.png" alt="OM Sample 2">
-                        <div class="overlay"><span>OM — Analysis</span></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Category 2: Additional OM / Investor Materials -->
-            <div class="portfolio-category">
-                <div class="category-header">
-                    <h3>Investor & Deal Materials</h3>
-                    <span class="count">04 Samples</span>
-                </div>
-                <div class="portfolio-grid">
-                    <div class="portfolio-item">
-                        <img src="resize-17903349591405508612Screenshot20260925143454.png" alt="Investor Material">
-                        <div class="overlay"><span>Investor Material</span></div>
-                    </div>
-                    <div class="portfolio-item">
-                        <img src="resize-1790334972539669995Screenshot20260925143608.png" alt="Deal Material">
-                        <div class="overlay"><span>Deal Summary</span></div>
-                    </div>
-                    <div class="portfolio-item">
-                        <img src="resize-17903350091037598149Screenshot20260925151239.png" alt="Analysis">
-                        <div class="overlay"><span>Market Analysis</span></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Category 3: Financial Models & Pro Formas -->
-            <div class="portfolio-category">
-                <div class="category-header">
-                    <h3>Financial Models & Pro Formas</h3>
-                    <span class="count">05 Samples</span>
-                </div>
-                <div class="portfolio-grid">
-                    <div class="portfolio-item">
-                        <img src="Investor Summary.png" alt="Investor Summary">
-                        <div class="overlay"><span>Investor Summary</span></div>
-                    </div>               
-                    <div class="portfolio-item">
-                        <img src="resize-17903690021995401513proforma.png" alt="Pro Forma Model">
-                        <div class="overlay"><span>Pro Forma Model</span></div>
-                    </div>
-                    <div class="portfolio-item">
-                        <img src="resize-17903730741338067630assumtionsvaluation.png" alt="Assumptions & Valuation">
-                        <div class="overlay"><span>Assumptions & Valuation</span></div>
-                    </div>
-                    <div class="portfolio-item">
-                        <img src="resize-1790373182952655746dcfsensitivityx.png" alt="DCF Sensitivity Analysis">
-                        <div class="overlay"><span>DCF Sensitivity Analysis</span></div>
-                    </div>
-                    <div class="portfolio-item">
-                        <img src="resize-17903688351408048904Screenshot20260926004017.png" alt="Financial Model">
-                        <div class="overlay"><span>Financial Model</span></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Category 4: Development Loans -->
-            <div class="portfolio-category">
-                <div class="category-header">
-                    <h3>Development Loan Underwriting</h3>
-                    <span class="count">06 Samples</span>
-                </div>
-                <div class="portfolio-grid">
-                    <div class="portfolio-item">
-                        <img src="Executive_summary_dev_loan-eresized.jpg" alt="Dev Loan Executive Summary">
-                        <div class="overlay"><span>Dev Loan — Executive Summary</span></div>
-                    </div>
-                    <div class="portfolio-item">
-                        <img src="dev_executive-summary-resized.png" alt="Dev Executive Summary">
-                        <div class="overlay"><span>Dev — Executive Summary</span></div>
-                    </div>
-                    <div class="portfolio-item">
-                        <img src="dev-proforma-resized.png" alt="Dev Pro Forma">
-                        <div class="overlay"><span>Dev Pro Forma</span></div>
-                    </div>
-                    <div class="portfolio-item">
-                        <img src="dev-amort-schedule-resized.png" alt="Amortization Schedule">
-                        <div class="overlay"><span>Amortization Schedule</span></div>
-                    </div>
-                    <div class="portfolio-item">
-                        <img src="rent_roll-resized.png" alt="Rent Roll">
-                        <div class="overlay"><span>Rent Roll</span></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Links to full files -->
-            <div class="portfolio-links">
-                <a href="https://drive.google.com/drive/folders/1gfrVLxrxD6atgexz8JkAarPtjZCfQg9W" target="_blank" class="portfolio-link">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-                    Full Portfolio Folder
-                </a>
-                <a href="https://drive.google.com/file/d/1bevXZjeAFCdrugy2g7bYpTgd5jsO7Rj0/view?usp=drive_link" target="_blank" class="portfolio-link">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
-                    Financial Model Sample
-                </a>
-                <a href="https://drive.google.com/file/d/1A_ydPzS1kl2MZ_CSb85O0BeF09wvU13K/view?usp=drive_link" target="_blank" class="portfolio-link">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg>
-                    Underwriting Sample
-                </a>
-                <a href="https://drive.google.com/file/d/1FxZrHgPzWaCBRef65dfkcyUbHi-qU1HZ/view?usp=drive_link" target="_blank" class="portfolio-link">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-                    Pitch Deck Sample
-                </a>
-                <a href="https://drive.google.com/file/d/1RqwJ3W4tFFyDLuypU_3sU2EZ8687ZU6Y/view?usp=drive_link" target="_blank" class="portfolio-link">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
-                    Investment Memo
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================
-         EXPERIENCE SECTION — UPDATED CONTENT
-         ============================================ -->
-    <section class="experience" id="experience">
-        <div class="section-container">
-            <div class="section-header">
-                <span class="section-eyebrow">Career</span>
-                <h2 class="section-title">Professional Experience</h2>
-                <p class="section-subtitle">A track record spanning commercial real estate, fintech, and global financial markets.</p>
-            </div>
-
-            <div class="timeline">
-                <!-- Experience 1: Independent Financial Consultant -->
-                <div class="timeline-item">
-                    <h3>Independent Financial Consultant</h3>
-                    <div class="company">Self-Employed (Upwork)</div>
-                    <div class="date">Nov 2025 — Present · Remote</div>
-                    <ul>
-                        <li>Supported capital raises and lending processes for multiple real estate clients by structuring offering memoranda and investor/lender presentations.</li>
-                        <li>Enabled confident investment decisions on value-add multifamily acquisitions by underwriting purchase price feasibility, renovation budgets, and projected exit returns for the deals.</li>
-                        <li>Improved investment and lending readiness for clients across asset types, including a retail and office condo project, by developing detailed pro formas and cash flow models.</li>
-                        <li>Supported multifamily acquisition decisions by underwriting deals and preparing financial analysis.</li>
-                        <li>Strengthened valuation accuracy and market positioning for multifamily assets by conducting comparable sales and rent analysis alongside market research on local supply, demand, and pricing trends.</li>
-                    </ul>
-                </div>
-
-                <!-- Experience 2: Real Estate Commercial Analyst -->
-                <div class="timeline-item">
-                    <h3>Real Estate Commercial Analyst</h3>
-                    <div class="company">Max Benjamin Partners</div>
-                    <div class="date">Oct 2024 — Mar 2025 · Remote</div>
-                    <ul>
-                        <li>Accelerated investment decision-making on acquisitions, developments, and refinancing deals by building detailed underwriting and cash flow models in Excel.</li>
-                        <li>Reduced deal-evaluation turnaround firm-wide by developing standardized templates for financial models and offering memoranda that were adopted across the team.</li>
-                        <li>Supported capital-raising and lending conversations with current market data by conducting market research and preparing offering memoranda and presentations using CoStar and PowerPoint.</li>
-                    </ul>
-                </div>
-
-                <!-- Experience 3: Financial Analyst -->
-                <div class="timeline-item">
-                    <h3>Financial Analyst</h3>
-                    <div class="company">Cognaize Engineering LLC</div>
-                    <div class="date">Dec 2022 — Apr 2024 · Hybrid</div>
-                    <ul>
-                        <li>Maintained data integrity across reviewed financial statements by cross-checking figures against notes and audit marks to catch discrepancies before sign-off.</li>
-                        <li>Improved the reliability of the company's AI-driven financial data extraction tool by validating its output against source documents and flagging missing or incorrect fields.</li>
-                    </ul>
-                </div>
-
-                <!-- Experience 4: Financial Markets Monitoring Specialist -->
-                <div class="timeline-item">
-                    <h3>Financial Markets Monitoring Specialist</h3>
-                    <div class="company">Exinity Group (FXTM)</div>
-                    <div class="date">Sep 2020 — Aug 2022</div>
-                    <ul>
-                        <li>Reduced operational risk from new product launches by testing trading products for errors prior to release.</li>
-                        <li>Maintained pricing integrity during volatile market conditions by monitoring trading activity and comparing prices against liquidity providers in real time.</li>
-                        <li>Gave explanations of market movements by investigating news and events behind significant price shifts.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================
-         EDUCATION & CERTIFICATIONS
-         ============================================ -->
-    <section class="education">
-        <div class="section-container">
-            <div class="section-header">
-                <span class="section-eyebrow">Background</span>
-                <h2 class="section-title">Education & Certifications</h2>
-            </div>
-
-            <div class="edu-grid">
-                <div class="edu-card">
-                    <h3>Education</h3>
-                    <ul>
-                        <li>
-                            <strong>M.S. in Economics</strong>
-                            American University of Armenia
-                            <span>2023 — 2024 (Coursework Completed)</span>
-                        </li>
-                        <li>
-                            <strong>Bachelor's in Economics</strong>
-                            Yerevan State University
-                            <span>2014 — 2018</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="edu-card">
-                    <h3>Certifications</h3>
-                    <ul>
-                        <li>
-                            <strong>ACRE</strong>
-                            Real Estate Financial Modeling Accelerator
-                        </li>
-                        <li>
-                            <strong>CFI & LinkedIn</strong>
-                            Corporate Finance Foundations; Financial Analysis & Modeling
-                        </li>
-                        <li>
-                            <strong>DataCamp</strong>
-                            Analyzing Financial Statements in Python; Financial Forecasting in Python
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="edu-card">
-                    <h3>Languages</h3>
-                    <ul>
-                        <li>
-                            <strong>Armenian</strong>
-                            Native
-                        </li>
-                        <li>
-                            <strong>English</strong>
-                            Advanced
-                        </li>
-                        <li>
-                            <strong>Russian</strong>
-                            Intermediate
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================
-         CONTACT SECTION
-         ============================================ -->
-    <section class="contact" id="contact">
-        <div class="section-container">
-            <div class="section-header">
-                <span class="section-eyebrow">Get In Touch</span>
-                <h2 class="section-title">Let's build something valuable.</h2>
-                <p class="section-subtitle">Available for freelance consulting, project-based engagements, and full-time opportunities.</p>
-            </div>
-
-            <div class="contact-card">
-                <div class="label">Email</div>
-                <a href="mailto:arakelyan.lusvard@gmail.com">arakelyan.lusvard@gmail.com</a>
-            </div>
-
-            <div>
-                <a href="mailto:arakelyan.lusvard@gmail.com" class="btn btn-primary">Schedule a Consultation</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================
-         FOOTER
-         ============================================ -->
-    <footer>
-        <p>&copy; 2026 Lusvard Arakelyan · Crafted with precision <span>·</span> All rights reserved.</p>
-    </footer>
-
-</body>
-</html>
+<script>
+  (function () {
+    var l = (document.documentElement.lang || 'en').slice(0, 2);
+    if (l !== 'fr' && l !== 'ru') l = 'en';
+    document.querySelectorAll('.nf [data-ph-en]').forEach(function (e) {
+      var t = e.getAttribute('data-ph-' + l) || e.getAttribute('data-ph-en');
+      e.setAttribute('placeholder', t);
+      e.setAttribute('aria-label', t);
+    });
+    document.querySelectorAll('.nf-tab').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var k = b.getAttribute('data-tab');
+        document.querySelectorAll('.nf-tab').forEach(function (x) { x.classList.toggle('active', x === b); });
+        document.querySelectorAll('.nf-sz-panel').forEach(function (pn) { pn.classList.toggle('active', pn.id === 'nf-sz-' + k); });
+      });
+    });
+  })();
+</script>
